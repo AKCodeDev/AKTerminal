@@ -33,7 +33,7 @@ enum class Color
     MAGENTA,
     WHITE,
     DEFAULT
-} // color
+}; // color
 
 // ----------------------------------------------------
 #define FOREGROUND true
@@ -44,6 +44,7 @@ void printForegroundColor(Color print_color);
 void printBackgroundColor(Color print_color);
 // ----------------------------------------------------
 void resetColor();
+// ----------------------------------------------------
 
 }
 

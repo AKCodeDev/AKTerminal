@@ -16,8 +16,9 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-#include "color_tools.hpp"
+#include "tools/color_tools.hpp"
 
+#include <iostream>
 #ifdef _WIN32
     #include <windows.h>
 #elif __unix__
@@ -27,7 +28,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 namespace AK
 {
 
-void printColor(bool is_background Color print_color)
+void printColor(bool is_background, Color print_color)
 {
 #ifdef _WIN32
     HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -117,17 +118,17 @@ void printColor(bool is_background Color print_color)
             resetColor();
             break;
     }
-}
+} // printColor
 
-void  printForegroundColor(Color print_color)
+void printForegroundColor(Color print_color)
 {
     printColor(FOREGROUND, print_color);
-}
+} // printForegroundColor
 
-void  printForegroundColor(Color print_color)
+void printBackgroundColor(Color print_color)
 {
     printColor(BACKGROUND, print_color);
-}
+} // printBackgroundColor
 
 void resetColor()
 {
@@ -136,6 +137,6 @@ void resetColor()
 #elif __unix__
     std::cout << "\033[0m";
 #endif
-}
+} // resetColor
 
 }

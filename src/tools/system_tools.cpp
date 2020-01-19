@@ -6,7 +6,10 @@
     #include <unistd.h>
 #endif
 
-void AK::sleepFunc(float t)
+namespace AK
+{
+
+void sleepFunc(float t)
 {
     #ifdef _WIN32
         Sleep(1000 * t);
@@ -15,11 +18,13 @@ void AK::sleepFunc(float t)
     #endif
 }
 
-void AK::clearFunc()
+void clearFunc()
 {
     #ifdef _WIN32
         system("CLS");
     #elif __unix__
         system("clear");
     #endif
-} 
+}
+
+}
