@@ -25,6 +25,9 @@ namespace AK
 void sleepFunc(float t);
 void clearFunc();
 
+bool ifKeyboardHit();
+char getKeyboardHitChar();
+
 }
 
 #endif

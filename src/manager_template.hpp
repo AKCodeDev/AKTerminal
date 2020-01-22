@@ -16,37 +16,17 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-#ifndef COLOR_TOOLS
-#define COLOR_TOOLS
+#ifndef MANAGER_TEMPLATE
+#define MANAGER_TEMPLATE
 
 namespace AK
 {
 
-enum class Color
+class Manager
 {
-    RED,
-    YELLOW,
-    GREEN,
-    BLACK,
-    CYAN,
-    BLUE,
-    MAGENTA,
-    WHITE,
-    DEFAULT
-}; // color
-
-// ----------------------------------------------------
-#define FOREGROUND false
-#define BACKGROUND true
-void printColor(bool is_background, Color print_color);
-// ----------------------------------------------------
-void printForegroundColor(Color print_color);
-void printBackgroundColor(Color print_color);
-// ----------------------------------------------------
-void resetColor();
-// ----------------------------------------------------
-Color reverseColor(Color color);
-// ----------------------------------------------------
+    public:
+        virtual void onUpdate();
+};
 
 }
 

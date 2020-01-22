@@ -14,24 +14,4 @@ GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
-*/
-
-#ifndef INPUT_MANAGER
-#define INPUT_MANAGER
-
-#include "io/cursor.hpp"
-#include "manager_template.hpp"
-
-namespace AK
-{
-
-class InputManager : 
-{
-    public:
-        
-
-};
-
-}
-
-#endif
+*/ 

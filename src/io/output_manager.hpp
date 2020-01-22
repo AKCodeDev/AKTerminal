@@ -20,11 +20,12 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #define OUTPUT_MANAGER
 
 #include "tools/color_tools.hpp"
+#include "manager_template.hpp"
 
 namespace AK
 {
 
-class OutputManager
+class OutputManager : public Manager
 {
     public:
     
@@ -56,7 +57,7 @@ class OutputManager
 // ------------------------------------------------------
         void setPixel(Pixel set_pixel, int x, int y);
 // ------------------------------------------------------
-        void updateOutput();
+        void onUpdate();
 // ------------------------------------------------------
 
 }; // OutputManager

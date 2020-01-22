@@ -16,38 +16,24 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-#ifndef COLOR_TOOLS
-#define COLOR_TOOLS
+#ifndef WARN_TOOLS
+#define WARN_TOOLS
+
+#include <string>
 
 namespace AK
 {
 
-enum class Color
-{
-    RED,
-    YELLOW,
-    GREEN,
-    BLACK,
-    CYAN,
-    BLUE,
-    MAGENTA,
-    WHITE,
-    DEFAULT
-}; // color
-
-// ----------------------------------------------------
-#define FOREGROUND false
-#define BACKGROUND true
-void printColor(bool is_background, Color print_color);
-// ----------------------------------------------------
-void printForegroundColor(Color print_color);
-void printBackgroundColor(Color print_color);
-// ----------------------------------------------------
-void resetColor();
-// ----------------------------------------------------
-Color reverseColor(Color color);
-// ----------------------------------------------------
+// ----------------------------------------------------------------
+void tryError(bool condition, std::string message, int return_val);
+// ----------------------------------------------------------------
+void throwError(std::string message, int return_val)[[noreturn]];
+// ----------------------------------------------------------------
+void tryWarn(bool condition, std::string message);
+// ----------------------------------------------------------------
+void throwWarn(std::string message);
+// ----------------------------------------------------------------
 
 }
 
-#endif
+#endif 

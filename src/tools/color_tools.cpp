@@ -28,32 +28,27 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 namespace AK
 {
 
+#ifdef _WIN32
+int g_saved_foreground;
+int g_saved_background;
+
+void setSaved(bool is_background, int value)
+{
+    if(is_background)
+        g_saved_background = value;
+    else
+        g_saved_foreground = value;
+}
+#endif
+
 void printColor(bool is_background, Color print_color)
 {
-#ifdef _WIN32
-    HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
-
-    int intensity = is_background ? BACKGROUND_INTENSITY : FOREGROUND_INTENSITY;
-    int red = is_background ? BACKGROUND_RED : FOREGROUND_RED;
-    int green = is_background ? BACKGROUND_GREEN : FOREGROUND_GREEN;
-    int blue = is_background ? BACKGROUND_BLUE : FOREGROUND_BLUE;
-#endif
-
     switch(print_color)
     {
-        case Color::BLACK:
-            // Print black
-#ifdef _WIN32
-            SetConsoleTextAttribute(handle, intensity);
-#elif __unix__
-            std::cout << (is_background ? "\033[40m" : "\033[30m");
-#endif
-            break;
-
         case Color::RED:
             // Print red
 #ifdef _WIN32
-            SetConsoleTextAttribute(handle, intensity | red);
+            setSaved(is_background, 0xc);
 #elif __unix__
             std::cout << (is_background ? "\033[41m" : "\033[31m");
 #endif
@@ -62,7 +57,7 @@ void printColor(bool is_background, Color print_color)
         case Color::YELLOW:
             // Print yellow
 #ifdef _WIN32
-            SetConsoleTextAttribute(handle, intensity | red | green);
+            setSaved(is_background, 0xe);
 #elif __unix__
             std::cout << (is_background ? "\033[42m" : "\033[32m");
 #endif
@@ -71,16 +66,25 @@ void printColor(bool is_background, Color print_color)
         case Color::GREEN:
             // Print green
 #ifdef _WIN32
-            SetConsoleTextAttribute(handle, intensity | green);
+            setSaved(is_background, 0xa);
 #elif __unix__
             std::cout << (is_background ? "\033[43m" : "\033[33m");
+#endif
+            break;
+            
+        case Color::BLACK:
+            // Print black
+#ifdef _WIN32
+            setSaved(is_background, 0);
+#elif __unix__
+            std::cout << (is_background ? "\033[40m" : "\033[30m");
 #endif
             break;
 
         case Color::CYAN:
             // Print cyan
 #ifdef _WIN32
-            SetConsoleTextAttribute(handle, intensity | green | blue);
+            setSaved(is_background, 0xb);
 #elif __unix__
             std::cout << (is_background ? "\033[46m" : "\033[36m");
 #endif
@@ -89,7 +93,7 @@ void printColor(bool is_background, Color print_color)
         case Color::BLUE:
             // Print blue
 #ifdef _WIN32
-            SetConsoleTextAttribute(handle, intensity | blue);
+            setSaved(is_background, 0x9);
 #elif __unix__
             std::cout << (is_background ? "\033[44m" : "\033[34m");
 #endif
@@ -98,7 +102,7 @@ void printColor(bool is_background, Color print_color)
         case Color::MAGENTA:
             // Print magenta
 #ifdef _WIN32
-            SetConsoleTextAttribute(handle, intensity | red | blue);
+            setSaved(is_background, 0xd);
 #elif __unix__
             std::cout << (is_background ? "\033[45m" : "\033[35m");
 #endif
@@ -107,7 +111,7 @@ void printColor(bool is_background, Color print_color)
         case Color::WHITE:
             // Print white
 #ifdef _WIN32
-            SetConsoleTextAttribute(handle, intensity | red | green | blue);
+            setSaved(is_background, 0xf);
 #elif __unix__
             std::cout << (is_background ? "\033[47m" : "\033[37m");
 #endif
@@ -116,8 +120,11 @@ void printColor(bool is_background, Color print_color)
         case Color::DEFAULT:
             // Print default
             resetColor();
-            break;
+            return;
     }
+#ifdef _WIN32
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), g_saved_background * 0x10 + g_saved_foreground);
+#endif
 } // printColor
 
 void printForegroundColor(Color print_color)
@@ -133,10 +140,18 @@ void printBackgroundColor(Color print_color)
 void resetColor()
 {
 #ifdef _WIN32
-    SetConsoleTextAttribute(handle, intensity);
+    g_saved_foreground = 0xf;
+    g_saved_background = 0;
+    SetConsoleTextAttribute(handle, 0xf);
 #elif __unix__
     std::cout << "\033[0m";
 #endif
 } // resetColor
+
+Color reverseColor(Color color)
+{
+    const int color_count = static_cast<int>(Color::DEFAULT);
+    return static_cast<Color>(static_cast<int>(color) + color_count / 2 % color_count);
+} // reverseColor
 
 }

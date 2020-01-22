@@ -1,5 +1,6 @@
 # AKTerminal
 ### A convinent game engine for terminal games
+### Version Hydrogen Proton
 ## Basic Structure
 The engine is designed to be object-oriented.
 
@@ -29,7 +30,7 @@ Managers in "others" folder are useful utils.
 
 "Tools" stands for function sets and misc things.
 
-If you can't find any words above in a file, it means it's an important virtual class.
+If you can't find any words above in a file, it means it's an normal class.
 ## Credits
 Developing by CodingJellyfish.
 

@@ -53,7 +53,7 @@ void OutputManager::setPixel(Pixel set_pixel, int x, int y)
     OutputManager::g_output[x][y] = set_pixel;
 }
 
-void OutputManager::updateOutput()
+void OutputManager::onUpdate()
 {
     for(int i = 0; i < OutputManager::g_width; i ++)
     {

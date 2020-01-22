@@ -16,37 +16,33 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-#ifndef COLOR_TOOLS
-#define COLOR_TOOLS
+#ifndef CURSOR_MANAGER
+#define CURSOR_MANAGER
+
+#include "io/output_manager.hpp"
+#include "tools/location_tools.hpp"
+#include "manager_template.hpp"
 
 namespace AK
 {
 
-enum class Color
+class CursorManager : public OutputManager::Pixel, public Manager
 {
-    RED,
-    YELLOW,
-    GREEN,
-    BLACK,
-    CYAN,
-    BLUE,
-    MAGENTA,
-    WHITE,
-    DEFAULT
-}; // color
-
-// ----------------------------------------------------
-#define FOREGROUND false
-#define BACKGROUND true
-void printColor(bool is_background, Color print_color);
-// ----------------------------------------------------
-void printForegroundColor(Color print_color);
-void printBackgroundColor(Color print_color);
-// ----------------------------------------------------
-void resetColor();
-// ----------------------------------------------------
-Color reverseColor(Color color);
-// ----------------------------------------------------
+    private:
+        
+        Location g_location = makeLocation(0, 0);
+        
+    public:
+    
+// ----------------------------
+        Cursor();
+// ----------------------------
+        void onUpdate();
+// ----------------------------
+        Location getClickedLocation();
+// ----------------------------
+        
+}
 
 }
 
