@@ -1,6 +1,6 @@
 # AKTerminal
-### A convinent game engine for terminal games
-### Version Hydrogen Proton
+#### A convinent game engine for terminal games
+#### Version 1.0 "Hydrogen Proton"
 ## Basic Structure
 The engine is designed to be object-oriented.
 

@@ -16,7 +16,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-#include "tools/location_tools.hpp"
+#include "tools/geometry_tools.hpp"
 
 #include "tools/warn_tools.hpp"
 
@@ -25,9 +25,9 @@ Area::Area(Location top_left, Location bottom_right)
     g_top_left = top_left;
     g_bottom_right = bottom_right;
     
-    bool x_error = g_top_left.x >= g_bottom_right.x;
-    bool y_error = g_top_left.y >= g_bottom_right.y;
-    tryError(x_error || y_error, "Invalid size in class Area");
+    bool x_error = g_top_left.x > g_bottom_right.x;
+    bool y_error = g_top_left.y > g_bottom_right.y;
+    tryError(x_error || y_error, "Invalid size in class \"Area\"");
 }
 
 void Area::insideArea(Location point)

@@ -19,14 +19,14 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #ifndef CURSOR_MANAGER
 #define CURSOR_MANAGER
 
-#include "io/output_manager.hpp"
-#include "tools/location_tools.hpp"
+#include "tools/graphic_tools.hpp"
+#include "tools/geometry_tools.hpp"
 #include "manager_template.hpp"
 
 namespace AK
 {
 
-class CursorManager : public OutputManager::Pixel, public Manager
+class CursorManager : public Pixel, public Manager
 {
     private:
         
@@ -34,15 +34,17 @@ class CursorManager : public OutputManager::Pixel, public Manager
         
     public:
     
-// ----------------------------
+// -------------------------------------------------------------------------
         Cursor();
-// ----------------------------
-        void onUpdate();
-// ----------------------------
+// -------------------------------------------------------------------------
+        void setCharacter(char set_character) { character = set_character; }
+// -------------------------------------------------------------------------
         Location getClickedLocation();
-// ----------------------------
+// -------------------------------------------------------------------------
+        void onUpdate();
+// -------------------------------------------------------------------------
         
-}
+};
 
 }
 

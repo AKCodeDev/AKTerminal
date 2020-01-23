@@ -36,21 +36,54 @@ OutputManager::OutputManager(int width, int height, float rate = DEFAULT_RATE)
     g_width = width;
     g_height = height;
     
-    g_output = new Pixel*[width];
+    g_image = new Pixel*[width];
     for(int i = 0; i < width; i ++)
     {
-        g_output[i] = new Pixel[height];
+        g_image[i] = new Pixel[height];
     }
 }
 
-OutputManager::~OutputManager()
+void OutputManager::setImage(Image set_image, Location set_location)
 {
-    delete g_output;
+    for(int i = 0; i < set_image.getWidth(); i ++)
+    {
+        if(i + set_location.x < 0)
+        {
+            continue;
+        }
+        
+        for(int j = 0; j < set_image.getHeight(); j ++)
+        {
+            if(j + set_location.y < 0)
+            {
+                continue;
+            }
+            
+            g_image[i + set_location.x][j + set_location.y] = set_image.g_image[i][j];
+        }
+    }
 }
 
-void OutputManager::setPixel(Pixel set_pixel, int x, int y)
+void OutputManager::setStretchedImage(Image set_image, Area set_area)
 {
-    OutputManager::g_output[x][y] = set_pixel;
+    for(int i = 0; i < set_area.getWidth(); i ++)
+    {
+        if(i + set_area.g_top_left.x < 0)
+        {
+            continue;
+        }
+        
+        for(int j = 0; j < set_area.getHeight(); j ++)
+        {
+            if(j + set_area.g_top_left.y < 0)
+            {
+                continue;
+            }
+            
+            g_image[i + set_area.g_top_left.x][j + set_area.g_top_left.y] = 
+                set_image.g_image[i % set_area.getWidth()][j % set_area.getHeight()];
+        }
+    }
 }
 
 void OutputManager::onUpdate()
@@ -59,10 +92,10 @@ void OutputManager::onUpdate()
     {
         for(int j = 0; j < OutputManager::g_height; j ++)
         {
-            printForegroundColor(OutputManager::g_output[i][j].foreground);
-            printBackgroundColor(OutputManager::g_output[i][j].background);
+            printForegroundColor(OutputManager::g_image[i][j].foreground);
+            printBackgroundColor(OutputManager::g_image[i][j].background);
             
-            std::cout << OutputManager::g_output[i][j].character;
+            std::cout << OutputManager::g_image[i][j].character;
         }
         
         resetColor();

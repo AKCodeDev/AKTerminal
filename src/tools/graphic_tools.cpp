@@ -16,30 +16,35 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-#ifndef INPUT_MANAGER
-#define INPUT_MANAGER
-
-#include "manager_template.hpp"
+#include "tools/graphic_tools.hpp"
 
 namespace AK
 {
 
-class InputManager : public Manager
+Image::Image(int width, int height, float rate = DEFAULT_RATE)
 {
-    private:
-        
-        char g_hit_char = EOF;
-        
-    public:
+    g_width = width;
+    g_height = height;
     
-// ---------------------------------------------------
-        char getHitChar() const { return g_hit_char; }
-// ---------------------------------------------------
-        void onUpdate();
-// ---------------------------------------------------
-
-};
-
+    g_image = new Pixel*[width];
+    for(int i = 0; i < width; i ++)
+    {
+        g_image[i] = new Pixel[height];
+    }
 }
 
-#endif
+Image::~Image()
+{
+    delete g_image;
+}
+
+void Image::setPixel(Pixel set_pixel, Location set_location)
+{
+    if(set_location.x < 0 || set_location.y < 0)
+    {
+        return;
+    }
+    Image::g_image[set_location.x][set_location.y] = set_pixel;
+} 
+
+}

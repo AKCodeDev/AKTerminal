@@ -16,28 +16,42 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-#ifndef INPUT_MANAGER
-#define INPUT_MANAGER
-
-#include "manager_template.hpp"
+#ifndef GRAPHIC_TOOLS
+#define GRAPHIC_TOOLS
 
 namespace AK
 {
 
-class InputManager : public Manager
+struct Pixel
+{
+    Color foreground;
+    Color background;
+    char character;
+};
+
+class Image
 {
     private:
         
-        char g_hit_char = EOF;
+        int g_width;
+        int g_height;
+        
+    protected:
+        
+        Pixel ** g_image;
         
     public:
     
-// ---------------------------------------------------
-        char getHitChar() const { return g_hit_char; }
-// ---------------------------------------------------
-        void onUpdate();
-// ---------------------------------------------------
-
+// -----------------------------------------------------------
+        Image(int width, int height);
+        ~Image();
+// -----------------------------------------------------------
+        int getWidth() const { return g_width; }
+        int getHeight() const { return g_height; }
+// -----------------------------------------------------------
+        void setPixel(Pixel set_pixel, Location set_location);
+// -----------------------------------------------------------
+        
 };
 
 }
