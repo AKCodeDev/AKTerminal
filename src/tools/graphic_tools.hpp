@@ -19,6 +19,9 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #ifndef GRAPHIC_TOOLS
 #define GRAPHIC_TOOLS
 
+#include "tools/color_tools.hpp"
+#include "tools/geometry_tools.hpp"
+
 namespace AK
 {
 
@@ -33,8 +36,8 @@ class Image
 {
     private:
         
-        int g_width;
-        int g_height;
+        int g_width = 0;
+        int g_height = 0;
         
     protected:
         
@@ -42,15 +45,21 @@ class Image
         
     public:
     
-// -----------------------------------------------------------
+// -------------------------------------------------------------------------------------------------------------------
         Image(int width, int height);
         ~Image();
-// -----------------------------------------------------------
+// -------------------------------------------------------------------------------------------------------------------
         int getWidth() const { return g_width; }
         int getHeight() const { return g_height; }
-// -----------------------------------------------------------
+// -------------------------------------------------------------------------------------------------------------------
+        void setImage(Image set_image, Location set_location);
+        void setStretchedImage(Image set_image, Area set_area);
+        Image getImageFromArea(Area get_area);
+// -------------------------------------------------------------------------------------------------------------------
         void setPixel(Pixel set_pixel, Location set_location);
-// -----------------------------------------------------------
+// -------------------------------------------------------------------------------------------------------------------
+        Area getArea(Location loc) const { return makeArea(loc.x, loc.y, loc.x + g_width - 1, loc.y + g_height - 1); }
+// -------------------------------------------------------------------------------------------------------------------
         
 };
 

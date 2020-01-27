@@ -22,10 +22,41 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 namespace AK
 {
 
-class Manager
+class BasicManager
 {
+	public:
+	
+// ------------------------------------------------------------
+        virtual void onUpdate() = 0;
+// ------------------------------------------------------------
+
+}
+
+template<class ChildManager>
+class PrivateManager : public BasicManager
+{
+	protected:
+		
+		static ChildManager * g_manager = nullptr;
+		
     public:
-        virtual void onUpdate();
+    
+// ------------------------------------------------------------
+		static void create() { g_manager = new ChildManager; }
+		static void destroy() { delete g_manager; }
+// ------------------------------------------------------------
+
+};
+
+template<class ChildManager>
+class Manager : public PrivateManager<ChildManager>
+{
+	public:
+	
+// ------------------------------------------------------------
+		static ChildManager * get() const { return g_manager; }
+// ------------------------------------------------------------
+
 };
 
 }

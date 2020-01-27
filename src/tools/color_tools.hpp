@@ -22,7 +22,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 namespace AK
 {
 
-enum class Color
+enum Color
 {
     RED,
     YELLOW,

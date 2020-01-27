@@ -27,7 +27,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 namespace AK
 {
 
-class OutputManager : public Manager, public Image
+class OutputManager : public PrivateManager<OutputManager>, public Image
 {
     private:
         
@@ -39,9 +39,6 @@ class OutputManager : public Manager, public Image
 // ------------------------------------------------------------
         OutputManager(int width, int height, float rate);
         using Image::~Image;
-// ------------------------------------------------------------
-        void setImage(Image set_image, Location set_location);
-        void setStretchedImage(Image set_image, Area set_area);
 // ------------------------------------------------------------
         void onUpdate();
 // ------------------------------------------------------------

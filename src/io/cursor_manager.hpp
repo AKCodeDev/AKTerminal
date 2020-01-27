@@ -19,6 +19,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #ifndef CURSOR_MANAGER
 #define CURSOR_MANAGER
 
+#include "io/input_manager.hpp"
 #include "tools/graphic_tools.hpp"
 #include "tools/geometry_tools.hpp"
 #include "manager_template.hpp"
@@ -26,23 +27,25 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 namespace AK
 {
 
-class CursorManager : public Pixel, public Manager
+class CursorManager : public Manager<OutputManager>, public Image
 {
     private:
         
-        Location g_location = makeLocation(0, 0);
+        Location g_location;
         
     public:
     
-// -------------------------------------------------------------------------
-        Cursor();
-// -------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------
+        CursorManager();
+// --------------------------------------------------------------------------------------
+        #define DEFAULT_CURSOR ' '
         void setCharacter(char set_character) { character = set_character; }
-// -------------------------------------------------------------------------
-        Location getClickedLocation();
-// -------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------
+        Location getClickedLocation() const { return g_location };
+        bool getIfClicked() const { return InputManager::g_manager->getHitChar == '\n'; }
+// --------------------------------------------------------------------------------------
         void onUpdate();
-// -------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------
         
 };
 

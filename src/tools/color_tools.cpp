@@ -45,7 +45,7 @@ void printColor(bool is_background, Color print_color)
 {
     switch(print_color)
     {
-        case Color::RED:
+        case RED:
             // Print red
 #ifdef _WIN32
             setSaved(is_background, 0xc);
@@ -54,7 +54,7 @@ void printColor(bool is_background, Color print_color)
 #endif
             break;
 
-        case Color::YELLOW:
+        case YELLOW:
             // Print yellow
 #ifdef _WIN32
             setSaved(is_background, 0xe);
@@ -63,7 +63,7 @@ void printColor(bool is_background, Color print_color)
 #endif
             break;
 
-        case Color::GREEN:
+        case GREEN:
             // Print green
 #ifdef _WIN32
             setSaved(is_background, 0xa);
@@ -72,7 +72,7 @@ void printColor(bool is_background, Color print_color)
 #endif
             break;
             
-        case Color::BLACK:
+        case BLACK:
             // Print black
 #ifdef _WIN32
             setSaved(is_background, 0);
@@ -81,7 +81,7 @@ void printColor(bool is_background, Color print_color)
 #endif
             break;
 
-        case Color::CYAN:
+        case CYAN:
             // Print cyan
 #ifdef _WIN32
             setSaved(is_background, 0xb);
@@ -90,7 +90,7 @@ void printColor(bool is_background, Color print_color)
 #endif
             break;
 
-        case Color::BLUE:
+        case BLUE:
             // Print blue
 #ifdef _WIN32
             setSaved(is_background, 0x9);
@@ -99,7 +99,7 @@ void printColor(bool is_background, Color print_color)
 #endif
             break;
 
-        case Color::MAGENTA:
+        case MAGENTA:
             // Print magenta
 #ifdef _WIN32
             setSaved(is_background, 0xd);
@@ -108,7 +108,7 @@ void printColor(bool is_background, Color print_color)
 #endif
             break;
 
-        case Color::WHITE:
+        case WHITE:
             // Print white
 #ifdef _WIN32
             setSaved(is_background, 0xf);
@@ -117,7 +117,7 @@ void printColor(bool is_background, Color print_color)
 #endif
             break;
 
-        case Color::DEFAULT:
+        case DEFAULT:
             // Print default
             resetColor();
             return;
@@ -150,8 +150,12 @@ void resetColor()
 
 Color reverseColor(Color color)
 {
-    const int color_count = static_cast<int>(Color::DEFAULT);
-    return static_cast<Color>(static_cast<int>(color) + color_count / 2 % color_count);
+	if(color == DEFAULT)
+	{
+		return DEFAULT;
+	}
+    const int color_count = DEFAULT;
+    return (color + color_count / 2) % color_count;
 } // reverseColor
 
 }

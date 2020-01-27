@@ -24,7 +24,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 namespace AK
 {
 
-class InputManager : public Manager
+class InputManager : public Manager<InputManager>
 {
     private:
         
