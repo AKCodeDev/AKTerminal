@@ -1,7 +1,7 @@
 # AKTerminal
 ### Object-oriented, convenient ASCII terminal game engine by AKCodeDev. 
 #### Version 1.0 "Hydrogen Proton"
-#### 亲爱的中国同胞，请到这里：[中文](https://github.com/AKCodeDev/AKTerminal/blob/master/README.md)。
+#### 亲爱的中国同胞，请到这里：[中文](https://github.com/AKCodeDev/AKTerminal/blob/master/README-cn.md)。
 ## Basic Structure
 The engine is designed to be object-oriented.
 
