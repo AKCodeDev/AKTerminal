@@ -25,17 +25,22 @@ Image::Image(int width, int height)
 {
     g_width = width;
     g_height = height;
-    
-    g_image = new Pixel*[width];
-    for(int i = 0; i < width; i ++)
-    {
-        g_image[i] = new Pixel[height];
-    }
+
+    initImage(width, height);
 }
 
 Image::~Image()
 {
     delete g_image;
+}
+
+void initImage(int width, int height)
+{
+    g_image = new Pixel*[width];
+    for(int i = 0; i < width; i ++)
+    {
+        g_image[i] = new Pixel[height];
+    }
 }
 
 void Image::setImage(Image set_image, Location set_location)

@@ -83,10 +83,7 @@ class Widget : public Image
     public:
 
 // -------------------------------------------------------------
-        using Image::Image;
-        using Image::~Image;
-// -------------------------------------------------------------
-        virtual void add() = 0;
+        virtual void add(Location place, int w, int h) = 0;
         virtual void render() = 0;
 // -------------------------------------------------------------
         void setVisible(bool vis) { g_visible = vis; }
