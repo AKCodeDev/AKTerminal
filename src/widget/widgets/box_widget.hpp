@@ -23,16 +23,11 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 class BoxWidget : public Widget
 {
-    private:
-
-        bool g_has_image;
-
     public:
 
-// -------------------------
-        void add();
-        void render();
-// -------------------------
+// ------------------------------------------------------
+        std::string getTypeName() const { return "box" };
+// ------------------------------------------------------
 
 }
 

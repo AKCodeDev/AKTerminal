@@ -31,19 +31,6 @@ class Widget : public Image
 {
     public:
 
-        enum WidgetType
-        {
-            TYPE_BOX,
-            TYPE_BUTTON,
-            TYPE_CHECKBOX,
-            TYPE_IMAGE,
-            TYPE_LABEL,
-            TYPE_LIST,
-            TYPE_PROGRESSBAR,
-            TYPE_TEXTBOX,
-            TYPECOUNT
-        };
-
         enum WidgetAttribute
         {
             ATTR_PROPORTION,
@@ -55,6 +42,8 @@ class Widget : public Image
             ATTR_ALIGN,
             ATTR_TEXT,
             ATTR_IMAGE,
+            ATTR_VISIBLE,
+            ATTR_FOCUSABLE,
             ATTRCOUNT
         };
 
@@ -78,13 +67,12 @@ class Widget : public Image
 
         std::string g_id;
 
-        WidgetType g_type;
-
     public:
 
 // -------------------------------------------------------------
-        virtual void add(Location place, int w, int h) = 0;
-        virtual void render() = 0;
+        virtual void add(Location place, int w, int h);
+        virtual void render();
+        virtual std::string getTypeName() = 0;
 // -------------------------------------------------------------
         void setVisible(bool vis) { g_visible = vis; }
         void setFocusable(bool focus) { g_focusable = focus; }
@@ -106,10 +94,8 @@ class Widget : public Image
 // -------------------------------------------------------------
         std::string getID() const { return g_id; } 
 // -------------------------------------------------------------
-        WidgetType getType() const { return g_type; }
-// -------------------------------------------------------------
 
-}
+};
 
 }
 

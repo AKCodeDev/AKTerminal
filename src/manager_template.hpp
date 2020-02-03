@@ -30,7 +30,7 @@ class BasicManager
         virtual void onUpdate() = 0;
 // ------------------------------------------------------------
 
-}
+};
 
 template<class ChildManager>
 class PrivateManager : public BasicManager

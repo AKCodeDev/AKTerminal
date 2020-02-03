@@ -27,7 +27,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 namespace AK
 {
 
-class CursorManager : public Manager<OutputManager>, public Image
+class CursorManager : public PrivateManager<OutputManager>, public Image
 {
     private:
         

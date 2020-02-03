@@ -1,29 +1,19 @@
 # AKTerminal
 ### Object-oriented, convenient ASCII terminal game engine by AKCodeDev. 
 #### Version 1.0 "Hydrogen Proton"
-#### 亲爱的中国同胞，请到这里：[中文](https://github.com/AKCodeDev/AKTerminal/blob/master/README-cn.md)。
+#### 亲爱的中国同胞，请到这里：[`中文`](/README-cn.md)。
 ## Basic Structure
-The engine is designed to be object-oriented.
+Object is for things in the game. It should be inherited and defined in your code.
 
-The main three part is: object, widget, screen.
-
-Object is for things in the game.
-
-Widget is for things in the menu or other GUI parts.
+Widget is for things in the interface. It can be added by XML in screen.
 
 Screen is for switching different faces between different games or GUI parts.
 
-Widgets are above; then objects; screens are underneath.
-
-Dialog can be seen as a widget, but it's a little different because it's defined like screens.
-
-There are other misc things in the engine.
+Dialog can be seen as a screen, which can be added above screens.
 
 The params are for configs or other special variables.
 
-IO, tools are mainly for core engine.
-
-Managers in "others" folder are useful utils.
+By defining these classes before main and creating them in main, it can form a game.
 ## Naming Rules
 "Manager" stands for singleton classes.
 
@@ -33,6 +23,6 @@ Managers in "others" folder are useful utils.
 
 If you can't find any words above in a file, it means it's an normal class.
 ## Credits
-Developing by CodingJellyfish.
+Developing by AKCodeDev.
 
 Especially thanks to project [SuperTuxKart](https://supertuxkart.net/).
