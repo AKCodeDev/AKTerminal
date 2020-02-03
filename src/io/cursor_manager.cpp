@@ -39,19 +39,19 @@ void CursorManager::onUpdate()
     * g_image -> foreground = reverseColor(foreground);
     * g_image -> background = reverseColor(background);
     
-    if(InputManager::g_manager->getHitChar() == 75)
+    if(InputManager::g_manager->getHitChar() == LEFT_ARROW)
     {
         g_location.x = std::max(g_location.x - 1, 0);
     }
-    else if(InputManager::g_manager->getHitChar() == 72)
+    else if(InputManager::g_manager->getHitChar() == UP_ARROW)
     {
         g_location.y = std::max(g_location.y - 1, 0);
     }
-    else if(InputManager::g_manager->getHitChar() == 77)
+    else if(InputManager::g_manager->getHitChar() == RIGHT_ARROW)
     {
         g_location.x = std::max(g_location.x + 1, 0);
     }
-    else if(InputManager::g_manager->getHitChar() == 80)
+    else if(InputManager::g_manager->getHitChar() == DOWN_ARROW)
     {
         g_location.y = std::max(g_location.y + 1, 0);
     }

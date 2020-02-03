@@ -22,7 +22,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 	#include <conio.h>
     #include <windows.h>
 #elif __unix__
-	#include <iostream>
+	#include <cstdio>
 	#include <fcntl.h>
 	#include <termios.h>
     #include <unistd.h>
@@ -78,7 +78,7 @@ bool ifKeyboardHit()
     oldf = fcntl(STDIN_FILENO, F_GETFL, 0);
     fcntl(STDIN_FILENO, F_SETFL, oldf | O_NONBLOCK);
 
-    std::cin >> ch;
+    ch = getchar();
 
     tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
     fcntl(STDIN_FILENO, F_SETFL, oldf);
@@ -111,7 +111,7 @@ char getKeyboardHitChar()
 	cfmakeraw(&newt);
 	tcsetattr(oldf, TCSANOW, &newt);
 
-	std::cin >> ch;
+	ch = getchar();
 	tcsetattr(oldf, TCSANOW, &oldt);
 
 	return ch;

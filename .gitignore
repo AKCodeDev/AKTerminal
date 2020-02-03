@@ -34,3 +34,6 @@
 # Specific things
 .vscode/
 src/test.cpp
+
+# Mirror script
+git_mirror_script.sh

@@ -29,14 +29,22 @@ class InputManager : public PrivateManager<InputManager>
     private:
         
         char g_hit_char = EOF;
+        bool g_if_start_press = false;
+        bool g_if_end_press = false;
         
     public:
     
-// ---------------------------------------------------
+// ---------------------------------------------------------------------------------
+        #define LEFT_ARROW 75
+        #define UP_ARROW 72
+        #define RIGHT_ARROW 77
+        #define DOWN_ARROW 80
         char getHitChar() const { return g_hit_char; }
-// ---------------------------------------------------
+        char getStartHitChar() const { return g_if_start_press ? g_hit_char : EOF; }
+        char getEndHitChar() const { return g_if_end_press ? g_hit_char : EOF; }
+// ---------------------------------------------------------------------------------
         void onUpdate();
-// ---------------------------------------------------
+// ---------------------------------------------------------------------------------
 
 };
 

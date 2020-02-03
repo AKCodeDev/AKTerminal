@@ -36,6 +36,7 @@ class Widget : public Image
             ATTR_PROPORTION,
             ATTR_WIDTH,
             ATTR_HEIGHT,
+            ARRE_PADDING,
             ATTR_X,
             ATTR_Y,
             ATTR_LAYOUT,

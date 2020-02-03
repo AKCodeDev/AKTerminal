@@ -27,10 +27,12 @@ void InputManager::onUpdate()
 {
     if(ifKeyboardHit())
     {
+        g_if_start_press = g_hit_char == EOF ? true : false;
         g_hit_char = getKeyboardHitChar();
     }
     else
     {
+        g_if_end_press = g_hit_char == EOF ? false : true;
         g_hit_char = EOF;
     }
 }
