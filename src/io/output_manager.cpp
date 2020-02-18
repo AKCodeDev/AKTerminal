@@ -25,34 +25,43 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 namespace AK
 {
 
+void OutputManager::printPixel(Pixel print_pixel)
+{
+    printForegroundColor(print_pixel.foreground);
+    printBackgroundColor(print_pixel.background);
+            
+    std::cout << print_pixel.character;
+}
+
 OutputManager::OutputManager(int width, int height, float rate = DEFAULT_RATE)
 {
+    x = 0;
+    y = 0;
+
     g_rate = rate;
     if(g_rate < 0.0f)
     {
         g_rate = DEFAULT_RATE;
     }
     
-    g_width = width;
-    g_height = height;
+    width = width;
+    height = height;
     
     g_image = new Pixel*[width];
     for(int i = 0; i < width; i ++)
     {
-        g_image[i] = new Pixel[height];
+        g_image[i] = new Pixel[height]();
     }
 }
 
 void OutputManager::onUpdate()
 {
-    for(int i = 0; i < OutputManager::g_width; i ++)
+    for(int i = 0; i < width; i ++)
     {
-        for(int j = 0; j < OutputManager::g_height; j ++)
+        for(int j = 0; j < height; j ++)
         {
-            printForegroundColor(OutputManager::g_image[i][j].foreground);
-            printBackgroundColor(OutputManager::g_image[i][j].background);
             
-            std::cout << OutputManager::g_image[i][j].character;
+            printPixel(g_image[i][j]);
         }
         
         resetColor();

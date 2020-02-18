@@ -20,41 +20,34 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "tools/warn_tools.hpp"
 
-Area::Area(Location top_left, Location bottom_right)
+namespace AK
 {
-    g_top_left = top_left;
-    g_bottom_right = bottom_right;
-    
-    bool x_error = g_top_left.x > g_bottom_right.x;
-    bool y_error = g_top_left.y > g_bottom_right.y;
-    tryError(x_error || y_error, "Invalid size in class \"Area\"");
+
+Location::Location(int set_x, int set_y)
+{
+    x = set_x;
+    y = set_y;
 }
 
-void Area::insideArea(Location point)
+Size::Size(int set_width, int set_height)
 {
-    bool x_inside = point.x >= g_top_left.x && point_x <= g_bottom_right.x;
-    bool y_inside = point.y >= g_top_left.y && point_y <= g_bottom_right.y;
+    width = set_width;
+    height = set_height;
+}
+
+Area::Area(Location set_location, Size set_size)
+{
+    x = set_location.x;
+    y = set_location.y;
+    width = set_size.width;
+    height = set_size.height;
+}
+
+bool Area::insideArea(Location point)
+{
+    bool x_inside = point.x >= x && point.x <= x + width;
+    bool y_inside = point.y >= y && point.y <= y + height;
     return x_inside && y_inside;
 }
 
-Location makeLocation(int x, int y)
-{
-    Location point;
-    point.x = x;
-    point_y = y;
-    return point;
-}
-
-Area makeArea(int x1, int y1, int x2, int y2)
-{
-    Location top_left = makeLocation(x1, y1);
-    Location bottom_right = makeLocation(x2, y2);
-    Area square(top_left, bottom_right);
-    return square;
-}
-
-Area makeArea(Location top_left, Location bottom_right)
-{
-    Area square(top_left, bottom_right);
-    return square;
 }

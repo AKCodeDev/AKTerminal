@@ -1,5 +1,5 @@
 # AKTerminal
-### 便捷的，面向对象的 ASCII 终端游戏引擎。
+### 便捷的，面向对象的 ASCII 游戏引擎。
 #### 1.0版 Hydrogen Proton
 ## 基本结构
 物体（object）为游戏内的物体，需要在编程中继承并自定义。
@@ -23,5 +23,7 @@
 如果您在文件中找不到上面的任何单词，则意味着它是普通类。
 ## 鸣谢
 本引擎由 AKCodeDev 开发。
+
+XML 分析器由 Lee Thomason 开发 [TinyXML2](https://github.com/leethomason/tinyxml2)。
 
 特别感谢项目 [SuperTuxKart](https://supertuxkart.net/)。

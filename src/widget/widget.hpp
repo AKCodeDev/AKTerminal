@@ -27,7 +27,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 namespace AK
 {
 
-class Widget : public Image
+class Widget : public BorderedImage
 {
     public:
 
@@ -48,21 +48,11 @@ class Widget : public Image
             ATTRCOUNT
         };
 
-        struct BorderSize
-        {
-            int left;
-            int right;
-            int top;
-            int bottom;
-        };
-
     private:
 
         bool g_visible;
         bool g_focusable;
         bool g_focused;
-
-        BorderSize g_border;
 
         Location g_location;
 
@@ -71,15 +61,12 @@ class Widget : public Image
     public:
 
 // -------------------------------------------------------------
-        virtual void add(Location place, int w, int h);
-        virtual void render();
+        virtual void add(Location place, Size size);
         virtual std::string getTypeName() = 0;
 // -------------------------------------------------------------
         void setVisible(bool vis) { g_visible = vis; }
         void setFocusable(bool focus) { g_focusable = focus; }
-        void setFocused(bool focus) { g_focused = focus; }
-// -------------------------------------------------------------
-        void setBorderSize(BorderSize size) { g_border = size; }
+        void setFocused(bool focus) { g_focused = focus; }   
 // -------------------------------------------------------------
         void move(Location point) { g_location = point; }
 // -------------------------------------------------------------

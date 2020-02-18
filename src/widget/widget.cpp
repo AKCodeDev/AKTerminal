@@ -23,44 +23,14 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 namespace AK
 {
 
-void Widget::add(Location place, int w, int h)
+void Widget::add(Location place, Size size)
 {
-    setWidth(w);
-    setHeight(h);
+    width = size.width;
+    height = size.height;
 
-    initImage(w, h);
+    initImage(size);
 
     move(place);
-}
-
-void Widget::render()
-{
-    if(g_has_image)
-    {
-        OutputManager::g_manager->setImage(* this, g_location);
-    }
-}
-
-void Widget::setImage(Image img)
-{
-    Area a1(makeLocation(0, 0), makeLocation(g_border.left, g_border.top));
-    setStretchedImage(img.getImageFromArea(a1), a1);
-    Area a2(makeLocation(g_border.left, 0), makeLocation(g_width - g_border.right, g_border.top));
-    setStretchedImage(img.getImageFromArea(a2), a2);
-    Area a3(makeLocation(g_width - g_border.right, 0), makeLocation(g_width, g_border.top));
-    setStretchedImage(img.getImageFromArea(a3), a3);
-    Area a4(makeLocation(0, g_border.top), makeLocation(g_border.left, g_height - g_border.bottom));
-    setStretchedImage(img.getImageFromArea(a4), a4);
-    Area a5(makeLocation(g_border.left, g_border.top), makeLocation(g_border.left, g_height - g_border.bottom));
-    setStretchedImage(img.getImageFromArea(a5), a5);
-    Area a6(makeLocation(g_width - g_border.right, g_border.top), makeLocation(g_border.left, g_height - g_border.bottom));
-    setStretchedImage(img.getImageFromArea(a6), a6);
-    Area a7(makeLocation(0, g_height - g_border.bottom), makeLocation(g_border.left, g_height));
-    setStretchedImage(img.getImageFromArea(a7), a7);
-    Area a8(makeLocation(g_border.left, g_height - g_border.bottom), makeLocation(g_border.left, g_height));
-    setStretchedImage(img.getImageFromArea(a8), a8);
-    Area a9(makeLocation(g_width - g_border.right, g_height - g_border.bottom), makeLocation(g_border.left, g_height));
-    setStretchedImage(img.getImageFromArea(a9), a9);
 }
 
 }

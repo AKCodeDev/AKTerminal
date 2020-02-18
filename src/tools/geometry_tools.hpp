@@ -24,35 +24,39 @@ namespace AK
 
 struct Location
 {
-    int x;
-    int y;
-};
-
-class Area
-{
-    public:
+        int x;
+        int y;
     
-        Location g_top_left;
-        Location g_bottom_right;
-
-// --------------------------------------------------------------------------
-        Area(Location top_left, Location bottom_right);
-// --------------------------------------------------------------------------
-        bool insideArea(Location point);
-// --------------------------------------------------------------------------
-        int getWidth() const { return g_bottom_right.x - g_top_left.x + 1; }
-        int getHeight() const { return g_bottom_right.y - g_top_left.y + 1; }
-// --------------------------------------------------------------------------
+// ------------------------------------
+        Location(int set_x, int set_y);
+// ------------------------------------
 
 };
 
-// --------------------------------------------------------------------------
-Location makeLocation(int x, int y);
-// --------------------------------------------------------------------------
-Area makeArea(int x1, int y1, int x2, int y2);
-// --------------------------------------------------------------------------
-Area makeArea(Location top_left, Location bottom_right);
-// --------------------------------------------------------------------------
+struct Size
+{
+        int width;
+        int height;
+
+// -----------------------------------------
+        Size(int set_width, int set_height);
+// -----------------------------------------
+
+};
+
+struct Area : Location, Size
+{
+
+// ------------------------------------------------
+        Area(Location set_location, Size set_size);
+// ------------------------------------------------
+        bool insideArea(Location point);
+// ------------------------------------------------
+        int getWidth() const { return width; }
+        int getHeight() const { return height; }
+// ------------------------------------------------
+
+};
 
 }
 

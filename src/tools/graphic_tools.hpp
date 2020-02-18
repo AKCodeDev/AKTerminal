@@ -19,6 +19,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #ifndef GRAPHIC_TOOLS
 #define GRAPHIC_TOOLS
 
+#include "tools/akml_tools.hpp"
 #include "tools/color_tools.hpp"
 #include "tools/geometry_tools.hpp"
 
@@ -27,42 +28,67 @@ namespace AK
 
 struct Pixel
 {
-    Color foreground;
-    Color background;
-    char character;
+        Color foreground;
+        Color background;
+        char character;
+
+// ---------------------------------------------------------------
+        Pixel(Color foreground, Color background, char character);
+// ---------------------------------------------------------------
+
 };
 
-class Image
+class Image : protected Size
 {
-    private:
-        
-        int g_width = 0;
-        int g_height = 0;
-        
     protected:
         
         Pixel ** g_image;
         
     public:
     
-// -------------------------------------------------------------------------------------------------------------------
-        Image(int width, int height);
-        ~Image();
-// -------------------------------------------------------------------------------------------------------------------
-        void initImage(int width, int height);
-// -------------------------------------------------------------------------------------------------------------------
-        int getWidth() const { return g_width; }
-        int getHeight() const { return g_height; }
-// -------------------------------------------------------------------------------------------------------------------
+// ------------------------------------------------------------
+        Image(AKML image_file);
+        Image(Size set_size) { initImage(set_size); }
+        ~Image() { delete g_image; }
+// ------------------------------------------------------------
+        void initImage(Size set_size);
+// ------------------------------------------------------------
         void setImage(Image set_image, Location set_location);
         void setStretchedImage(Image set_image, Area set_area);
         Image getImageFromArea(Area get_area);
-// -------------------------------------------------------------------------------------------------------------------
+// ------------------------------------------------------------
         void setPixel(Pixel set_pixel, Location set_location);
-// -------------------------------------------------------------------------------------------------------------------
-        Area getArea(Location loc) const { return makeArea(loc.x, loc.y, loc.x + g_width - 1, loc.y + g_height - 1); }
-// -------------------------------------------------------------------------------------------------------------------
+// ------------------------------------------------------------
         
+};
+
+class BorderedImage : public Image
+{
+    public:
+
+        struct BorderSize
+        {
+            int left;
+            int right;
+            int top;
+            int bottom;
+        };
+
+    private:
+
+        BorderSize g_border;
+
+    public:
+
+// ----------------------------------------------------------------------------
+        BorderedImage(AKML image_file) { setBorderedImage(Image(image_file)); }
+        BorderedImage(Size set_size) { initImage(set_size); }
+// ----------------------------------------------------------------------------
+        void setBorderSize(BorderSize size) { g_border = size; }
+// ----------------------------------------------------------------------------
+        void setBorderedImage(Image img);
+// ----------------------------------------------------------------------------
+
 };
 
 }

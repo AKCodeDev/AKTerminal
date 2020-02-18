@@ -27,21 +27,24 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 namespace AK
 {
 
-class OutputManager : public PrivateManager<OutputManager>, public Image
+class OutputManager : public PrivateManager<OutputManager>, public LocatedImage
 {
     private:
         
         #define DEFAULT_RATE 6.0f
         float g_rate;
+
+// ------------------------------------------------------
+        void printPixel(Pixel print_pixel);
+// ------------------------------------------------------
         
     public:
     
-// ------------------------------------------------------------
+// ------------------------------------------------------
         OutputManager(int width, int height, float rate);
-        using Image::~Image;
-// ------------------------------------------------------------
+// ------------------------------------------------------
         void onUpdate();
-// ------------------------------------------------------------
+// ------------------------------------------------------
 
 }; // OutputManager
 

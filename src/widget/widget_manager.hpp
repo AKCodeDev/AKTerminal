@@ -16,4 +16,25 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-#ifndef W
+#ifndef WIDGET_MANAGER
+#define WIDGET_MANAGER
+
+#include "manager_template.hpp"
+
+namespace AK
+{
+
+class WidgetManager : public Manager<WidgetManager>
+{
+
+    private:
+
+    public:
+
+        void onUpdate();
+
+};
+
+}
+
+#endif
