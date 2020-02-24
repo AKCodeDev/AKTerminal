@@ -21,12 +21,24 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 namespace AK
 {
 
+Pixel::Pixel(Color set_foreground = Color::DEFAULT, Color set_background = Color::DEFAULT, char set_character = ' ')
+{
+    foreground = set_foreground;
+    background = set_background;
+    character = set_character;
+}
+
 Image::Image(AKML image_file)
 {
 
 }
 
-void initImage(Size set_size)
+Image::Image(Size set_size)
+{
+    initImage(set_size);
+}
+
+void Image::initImage(Size set_size)
 {
     g_image = new Pixel * [set_size.width];
     for(int i = 0; i < set_size.width; i ++)

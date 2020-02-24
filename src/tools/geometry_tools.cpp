@@ -23,13 +23,13 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 namespace AK
 {
 
-Location::Location(int set_x, int set_y)
+Location::Location(int set_x = 0, int set_y = 0)
 {
     x = set_x;
     y = set_y;
 }
 
-Size::Size(int set_width, int set_height)
+Size::Size(int set_width = 0, int set_height = 0)
 {
     width = set_width;
     height = set_height;

@@ -27,7 +27,7 @@ namespace AK
 // ----------------------------------------------------------------
 void tryError(bool condition, std::string message, int return_val);
 // ----------------------------------------------------------------
-void throwError(std::string message, int return_val)[[noreturn]];
+void throwError[[noreturn]](std::string message, int return_val);
 // ----------------------------------------------------------------
 void tryWarn(bool condition, std::string message);
 // ----------------------------------------------------------------

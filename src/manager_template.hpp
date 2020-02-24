@@ -26,14 +26,14 @@ class BasicManager
 {
 	public:
 	
-// ------------------------------------------------------------
+// ---------------------------------
         virtual void onUpdate() = 0;
-// ------------------------------------------------------------
+// ---------------------------------
 
 };
 
 template<class ChildManager>
-class PrivateManager : public BasicManager
+class Manager : public BasicManager
 {
 	protected:
 		
@@ -43,18 +43,8 @@ class PrivateManager : public BasicManager
     
 // ------------------------------------------------------------
 		static void create() { g_manager = new ChildManager; }
-		static void destroy() { delete g_manager; }
-// ------------------------------------------------------------
-
-};
-
-template<class ChildManager>
-class Manager : public PrivateManager<ChildManager>
-{
-	public:
-	
-// ------------------------------------------------------------
 		static ChildManager * get() const { return g_manager; }
+		static void destroy() { delete g_manager; }
 // ------------------------------------------------------------
 
 };

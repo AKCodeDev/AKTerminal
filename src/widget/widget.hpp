@@ -31,21 +31,21 @@ class Widget : public BorderedImage
 {
     public:
 
-        enum WidgetAttribute
+        enum class WidgetAttribute
         {
-            ATTR_PROPORTION,
-            ATTR_WIDTH,
-            ATTR_HEIGHT,
-            ARRE_PADDING,
-            ATTR_X,
-            ATTR_Y,
-            ATTR_LAYOUT,
-            ATTR_ALIGN,
-            ATTR_TEXT,
-            ATTR_IMAGE,
-            ATTR_VISIBLE,
-            ATTR_FOCUSABLE,
-            ATTRCOUNT
+            PROPORTION,
+            WIDTH,
+            HEIGHT,
+            PADDING,
+            X,
+            Y,
+            LAYOUT,
+            ALIGN,
+            TEXT,
+            IMAGE,
+            VISIBLE,
+            FOCUSABLE,
+            COUNT
         };
 
     private:
@@ -60,28 +60,26 @@ class Widget : public BorderedImage
 
     public:
 
-// -------------------------------------------------------------
+// -----------------------------------------------------------
         virtual void add(Location place, Size size);
         virtual std::string getTypeName() = 0;
-// -------------------------------------------------------------
+// -----------------------------------------------------------
         void setVisible(bool vis) { g_visible = vis; }
         void setFocusable(bool focus) { g_focusable = focus; }
         void setFocused(bool focus) { g_focused = focus; }   
-// -------------------------------------------------------------
+// -----------------------------------------------------------
         void move(Location point) { g_location = point; }
-// -------------------------------------------------------------
+// -----------------------------------------------------------
         void setID(std::string str) { g_id = str; }
-// -------------------------------------------------------------
-        void setImage(Image img);
-// -------------------------------------------------------------
+// -----------------------------------------------------------
         bool ifVisible() const { return g_visible; }
         bool ifFocusable() const { return g_focusable; }
         bool ifFocused() const { return g_focused; }
-// -------------------------------------------------------------
+// -----------------------------------------------------------
         Location getLocation() const { return g_location; }
-// -------------------------------------------------------------
+// -----------------------------------------------------------
         std::string getID() const { return g_id; } 
-// -------------------------------------------------------------
+// -----------------------------------------------------------
 
 };
 

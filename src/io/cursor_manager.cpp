@@ -28,10 +28,10 @@ namespace AK
 
 CursorManager::CursorManager()
 {
-    character = DEFAULT_CURSOR;
+    * g_image -> character = DEFAULT_CURSOR;
     
     g_image = new Pixel *;
-    * g_image = new Pixel;
+    * g_image = new Pixel();
 }
 
 void CursorManager::onUpdate()
@@ -39,19 +39,19 @@ void CursorManager::onUpdate()
     * g_image -> foreground = reverseColor(foreground);
     * g_image -> background = reverseColor(background);
     
-    if(InputManager::g_manager->getHitChar() == LEFT_ARROW)
+    if(InputManager::get()->getHitChar() == LEFT_ARROW)
     {
         g_location.x = std::max(g_location.x - 1, 0);
     }
-    else if(InputManager::g_manager->getHitChar() == UP_ARROW)
+    else if(InputManager::get()->getHitChar() == UP_ARROW)
     {
         g_location.y = std::max(g_location.y - 1, 0);
     }
-    else if(InputManager::g_manager->getHitChar() == RIGHT_ARROW)
+    else if(InputManager::get()->getHitChar() == RIGHT_ARROW)
     {
         g_location.x = std::max(g_location.x + 1, 0);
     }
-    else if(InputManager::g_manager->getHitChar() == DOWN_ARROW)
+    else if(InputManager::get()->getHitChar() == DOWN_ARROW)
     {
         g_location.y = std::max(g_location.y + 1, 0);
     }

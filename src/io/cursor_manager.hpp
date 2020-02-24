@@ -27,7 +27,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 namespace AK
 {
 
-class CursorManager : public PrivateManager<OutputManager>, public Image
+class CursorManager : public Manager<OutputManager>, public Image
 {
     private:
         
@@ -39,10 +39,10 @@ class CursorManager : public PrivateManager<OutputManager>, public Image
         CursorManager();
 // --------------------------------------------------------------------------------------
         #define DEFAULT_CURSOR ' '
-        void setCharacter(char set_character) { character = set_character; }
+        void setCharacter(char set_character) { * g_image->character = set_character; }
 // --------------------------------------------------------------------------------------
-        Location getClickedLocation() const { return g_location };
-        bool getIfClicked() const { return InputManager::g_manager->getHitChar == '\n'; }
+        Location getClickedLocation() const { return g_location; };
+        bool getIfClicked() const { return InputManager::get()->getHitChar == '\n'; }
 // --------------------------------------------------------------------------------------
         void onUpdate();
 // --------------------------------------------------------------------------------------

@@ -19,15 +19,19 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #ifndef WIDGET_MANAGER
 #define WIDGET_MANAGER
 
+#include "widget/widget.hpp"
 #include "manager_template.hpp"
+
+#include <vector>
 
 namespace AK
 {
 
 class WidgetManager : public Manager<WidgetManager>
 {
-
     private:
+
+        std::vector<Widget *> g_all_widgets;
 
     public:
 

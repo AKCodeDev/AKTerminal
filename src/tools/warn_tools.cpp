@@ -36,45 +36,40 @@ void tryError(bool condition, std::string message, int return_val = 1)
         throwError(message, return_val);
 }
 
-void throwError(std::string message, int return_val = 1)[[noreturn]]
+void throwError[[noreturn]](std::string message, int return_val = 1)
 {
     if(return_val == 0)
         throwError("Invalid return value in throwError()");
     
     printBackgroundColor(Color::RED);
-    cout << message << endl;
+    std::cout << message << std::endl;
     resetColor();
-    cout << "Press \"Enter\" to quit" << endl;
+    std::cout << "Press \"Enter\" to quit" << std::endl;
     
     while(1)
     {
-        if(getch == "\n")
+        if(getKeyboardHitChar() == '\n')
             exit(return_val);
     }
 }
 
 void tryWarn(bool condition, std::string message)
 {
-    if(return_val == 0)
-        throwError("Invalid return value in tryWarn()");
-
     if(condition)
-        throwWarn(message, return_val);
+        throwWarn(message);
 }
 
 void throwWarn(std::string message)
 {
-    if(return_val == 0)
-        throwError("Invalid return value in throwWarn()");
     
     printBackgroundColor(Color::YELLOW);
-    cout << message << endl;
+    std::cout << message << std::endl;
     resetColor();
-    cout << "Press \"Enter\" to continue" << endl;
+    std::cout << "Press \"Enter\" to continue" << std::endl;
     
     while(1)
     {
-        if(getch == "\n")
+        if(getKeyboardHitChar() == '\n')
             break;
     }
 }

@@ -33,11 +33,8 @@ void OutputManager::printPixel(Pixel print_pixel)
     std::cout << print_pixel.character;
 }
 
-OutputManager::OutputManager(int width, int height, float rate = DEFAULT_RATE)
+OutputManager::OutputManager(Size size, float rate = DEFAULT_RATE)
 {
-    x = 0;
-    y = 0;
-
     g_rate = rate;
     if(g_rate < 0.0f)
     {
@@ -50,7 +47,7 @@ OutputManager::OutputManager(int width, int height, float rate = DEFAULT_RATE)
     g_image = new Pixel*[width];
     for(int i = 0; i < width; i ++)
     {
-        g_image[i] = new Pixel[height]();
+        g_image[i] = new Pixel[height];
     }
 }
 
@@ -60,7 +57,6 @@ void OutputManager::onUpdate()
     {
         for(int j = 0; j < height; j ++)
         {
-            
             printPixel(g_image[i][j]);
         }
         

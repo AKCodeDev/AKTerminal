@@ -18,6 +18,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "tools/system_tools.hpp"
 
+#include <cstdlib>
 #ifdef _WIN32
 	#include <conio.h>
     #include <windows.h>
@@ -48,11 +49,11 @@ void clearFunc()
 {
 #ifdef _WIN32
 
-	system("CLS");
+	std::system("CLS");
 
 #elif __unix__
 
-	system("clear");
+	std::system("clear");
 
 #endif
 }
