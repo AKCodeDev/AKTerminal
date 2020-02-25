@@ -28,6 +28,8 @@ class File
 
         std::ifstream g_stream;
 
+        int g_line_count;
+
     public:
 
 // ------------------------------------------------------------------
@@ -40,6 +42,10 @@ class File
         std::string getLineToChar(char to_char);
         std::string getLineFromChar(char from_char);
         std::string getLineBetweenChar(char from_char, char to_char);    
+// ------------------------------------------------------------------
+        void goToLastLine();
+// ------------------------------------------------------------------
+        int getLineCount() const { return g_line_count; }
 // ------------------------------------------------------------------
 
 };

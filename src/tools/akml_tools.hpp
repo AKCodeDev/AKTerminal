@@ -19,6 +19,8 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #ifndef AKML_TOOLS
 #define AKML_TOOLS
 
+#include "file_tools.hpp"
+
 #include <map>
 #include <string>
 
@@ -29,12 +31,17 @@ class AKML
 {
     private:
 
-        std::map<std::string, std::string> all_contents;
+        std::map<std::string, std::string> g_all_contents;
 
     public:
 
 // --------------------------------------------
-        AKML(std::string filename);
+        #define CONTENT_LEFT '['
+        #define CONTENT_RIGHT ']'
+        #define LABEL_BEGIN 'b'
+        #define LABEL_ATTRIBUTE 'a'
+        #define LABEL_CONTENT 'c'
+        AKML(File file);
 // --------------------------------------------
         std::string get(std::string attribute);
 // --------------------------------------------

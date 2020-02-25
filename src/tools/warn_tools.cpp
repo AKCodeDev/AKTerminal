@@ -30,16 +30,22 @@ namespace AK
 void tryError(bool condition, std::string message, int return_val = 1)
 {
     if(return_val == 0)
+    {
         throwError("Invalid return value in tryError()");
+    }
 
     if(condition)
+    {
         throwError(message, return_val);
+    }
 }
 
-void throwError[[noreturn]](std::string message, int return_val = 1)
+void throwError [[noreturn]] (std::string message, int return_val = 1)
 {
     if(return_val == 0)
+    {
         throwError("Invalid return value in throwError()");
+    }
     
     printBackgroundColor(Color::RED);
     std::cout << message << std::endl;
@@ -49,19 +55,22 @@ void throwError[[noreturn]](std::string message, int return_val = 1)
     while(1)
     {
         if(getKeyboardHitChar() == '\n')
+        {
             exit(return_val);
+        }
     }
 }
 
 void tryWarn(bool condition, std::string message)
 {
     if(condition)
+    {
         throwWarn(message);
+    }
 }
 
 void throwWarn(std::string message)
 {
-    
     printBackgroundColor(Color::YELLOW);
     std::cout << message << std::endl;
     resetColor();
@@ -70,7 +79,9 @@ void throwWarn(std::string message)
     while(1)
     {
         if(getKeyboardHitChar() == '\n')
+        {
             break;
+        }
     }
 }
 

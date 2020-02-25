@@ -20,9 +20,12 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "tools/warn_tools.hpp"
 
+#include <iostream>
+
 File::File(std::string filename, std::string file_namespace = "")
 {
     g_stream.open(file_namespace + filename);
+    g_line_count = 0;
 }
 
 File::~File()
@@ -32,7 +35,8 @@ File::~File()
 
 void File::reset()
 {
-
+    g_stream.clear();
+    g_line_count = 0;
 }
 
 std::string File::getLine()
@@ -43,10 +47,11 @@ std::string File::getLine()
         reset();
         return getLine();
     }
+    g_line_count ++;
     return ret;
 }
 
-std::string File::getLineToChar(char to_char);
+std::string File::getLineToChar(char to_char)
 {
     std::string str = getLine();
     std::string::size_type position = str.find(to_char);
@@ -56,7 +61,7 @@ std::string File::getLineToChar(char to_char);
     return str.substr(0, position);
 }
 
-std::string File::getLineFromChar(char from_char);
+std::string File::getLineFromChar(char from_char)
 {
     std::string str = getLine();
     std::string::size_type position = str.find(from_char);
@@ -66,7 +71,7 @@ std::string File::getLineFromChar(char from_char);
     return str.substr(position + 1);
 }
 
-std::string File::getLineBetweenChar(char from_char, char to_char);
+std::string File::getLineBetweenChar(char from_char, char to_char)
 {
     std::string str = getLine();
     std::string::size_type from_position = str.find(from_char);
@@ -76,4 +81,9 @@ std::string File::getLineBetweenChar(char from_char, char to_char);
     tryError(to_position == std::string::npos, ("Didn't find char %c in class \"File\""));
 
     return str.substr(from_position + 1, to_position - from_position);
+}
+
+void File::goToLastLine()
+{
+    g_stream.seekg(-1, std::ios::cur);
 }
