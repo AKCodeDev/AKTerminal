@@ -33,18 +33,22 @@ class AKML
 
         std::map<std::string, std::string> g_all_contents;
 
+        std::string g_version;
+
     public:
 
-// --------------------------------------------
+// ---------------------------------------------------------
         #define CONTENT_LEFT '['
         #define CONTENT_RIGHT ']'
         #define LABEL_BEGIN 'b'
         #define LABEL_ATTRIBUTE 'a'
         #define LABEL_CONTENT 'c'
         AKML(File file);
-// --------------------------------------------
+// ---------------------------------------------------------
         std::string get(std::string attribute);
-// --------------------------------------------
+// ---------------------------------------------------------
+        std::string getVersion() const { return g_version; }
+// ---------------------------------------------------------
 
 };
 
