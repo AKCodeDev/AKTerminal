@@ -20,7 +20,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "tools/warn_tools.hpp"
 
-#include <vector>
+#include <algorithm>
 
 namespace AK
 {
@@ -29,7 +29,6 @@ AKML::AKML(File file)
 {
     std::string current;
     std::vector<std::string> all;
-    int len;
 
     while(1)
     {
@@ -40,6 +39,9 @@ AKML::AKML(File file)
             if(all.empty())
             {
                 g_version = current;
+
+                std::vector<std::string>::iterator check_version = std::find(g_avaliable_version.begin(), g_avaliable_version.end(), g_version);
+                tryError(check_version == g_avaliable_version.end(), ("Invalid version \"%s\"in AKML", g_version));
             }
             else
             {

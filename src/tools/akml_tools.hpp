@@ -23,6 +23,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include <map>
 #include <string>
+#include <vector>
 
 namespace AK
 {
@@ -35,14 +36,14 @@ class AKML
 
         std::string g_version;
 
+        std::vector<std::string> g_avaliable_version {"AKML0", "AKML1"};
+
     public:
 
 // ---------------------------------------------------------
         #define CONTENT_LEFT '['
         #define CONTENT_RIGHT ']'
-        #define LABEL_BEGIN 'b'
         #define LABEL_ATTRIBUTE 'a'
-        #define LABEL_CONTENT 'c'
         AKML(File file);
 // ---------------------------------------------------------
         std::string get(std::string attribute);
