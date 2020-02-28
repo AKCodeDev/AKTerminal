@@ -58,10 +58,19 @@ Image::Image(AKML image_file)
             {
                 foreground_str >> f;
             }
+            else
+            {
+                f = 'd';
+            }
             if(b != '\n' || b != EOF)
             {
                 background_str >> b;
             }
+            else
+            {
+                b = 'd';
+            }
+            
             g_image[row][column] = Pixel(charToColor(b), charToColor(f), c);
         }
         if(c == EOF)

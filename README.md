@@ -1,19 +1,27 @@
 # AKTerminal
-### Object-oriented, convenient ASCII terminal game engine by AKCodeDev. 
+### Object-oriented ASCII game engine. 
 #### Version 1.0 "Hydrogen Proton"
 #### Other languages [`中文`](/README-cn.md)。
 ## Basic Structure
-Object is for things in the game. It should be inherited and defined in your code.
-
+#### Three main parts
+##### Object
+Object is for things in the game. It should be inherited and defined in your code. Its image is called "Sprite".
+##### Widget
 Widget is for things in the interface. It can be added by XML in screen.
-
+##### Screen
 Screen is for switching different faces between different games or GUI parts.
-
-Dialog can be considered as a screen, which can be added above screens.
-
-The params are for configs or other special variables.
+#### Other parts
+##### Clock
+Timer for game.
+##### Dialog
+Dialog can be considered as a screen, which can be added like an object above screens.
+##### Path
+Path can define a route for objects and dialogs to move along.
+##### Parameters
+The parameters are for configs or other special variables.
 
 By defining these classes before main and creating them in main, it can form a game.
+
 ## Naming Rules
 "Manager" stands for singleton classes.
 
@@ -22,6 +30,28 @@ By defining these classes before main and creating them in main, it can form a g
 "Tools" stands for function sets and misc things.
 
 If you can't find any words above in a file, it means it's an normal class.
+
+## AKML
+AKML is a kind of markup language for defining images and sprites.
+
+It's grammar is like this:
+
+[AKML version]
+
+a   [label name]
+
+    [its content]
+
+    [another part of its content]
+
+    [yet another part of its content]
+
+a   [another label name]
+
+...
+
+Between each content line there is a line break added.
+
 ## Credits
 Developing by AKCodeDev.
 

@@ -56,7 +56,7 @@ std::string File::getLineToChar(char to_char)
     std::string str = getLine();
     std::string::size_type position = str.find(to_char);
 
-    tryError(position == std::string::npos, ("Didn't find char %c in class \"File\""));
+    tryError(position == std::string::npos, ("Didn't find char %c in class \"File\"", to_char));
 
     return str.substr(0, position);
 }
@@ -77,8 +77,8 @@ std::string File::getLineBetweenChar(char from_char, char to_char)
     std::string::size_type from_position = str.find(from_char);
     std::string::size_type to_position = str.find(to_char);
 
-    tryError(from_position == std::string::npos, ("Didn't find char %c in class \"File\""));
-    tryError(to_position == std::string::npos, ("Didn't find char %c in class \"File\""));
+    tryError(from_position == std::string::npos, ("Didn't find char %c in class \"File\"", from_char));
+    tryError(to_position == std::string::npos, ("Didn't find char %c in class \"File\"", to_char));
 
     return str.substr(from_position + 1, to_position - from_position);
 }

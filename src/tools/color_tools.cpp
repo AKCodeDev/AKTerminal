@@ -182,7 +182,7 @@ Color charToColor(char character)
         case 'D':
             return Color::DEFAULT;
         default:
-            throwError(("Invalid color char \"%c\"", character));
+            throwError("Invalid color char");
     }
 }
 

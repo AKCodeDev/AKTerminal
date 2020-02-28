@@ -30,3 +30,5 @@ class ScreenManager : public Manager<ScreenManager>
 };
 
 }
+
+#endif
