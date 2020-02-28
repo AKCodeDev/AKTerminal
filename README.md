@@ -27,7 +27,7 @@ By defining these classes before main and creating them in main, it can form a g
 
 "Param" stands for parameter classes.
 
-"Tools" stands for function sets and misc things.
+"Tools" stands for global function sets.
 
 If you can't find any words above in a file, it means it's an normal class.
 
@@ -36,19 +36,16 @@ AKML is a kind of markup language for defining images and sprites.
 
 It's grammar is like this:
 
+```akml
 [AKML version]
-
 a   [label name]
-
     [its content]
-
     [another part of its content]
-
     [yet another part of its content]
-
 a   [another label name]
-
 ...
+
+```
 
 Between each content line there is a line break added.
 
