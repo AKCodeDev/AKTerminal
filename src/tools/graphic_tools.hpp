@@ -32,9 +32,9 @@ struct Pixel
         Color background;
         char character;
 
-// ---------------------------------------------------------------------------
-        Pixel(Color set_foreground, Color set_background, char set_character);
-// ---------------------------------------------------------------------------
+// -------------------------------------------------------------------------------------------------------------------
+        Pixel(Color set_foreground = Color::DEFAULT, Color set_background = Color::DEFAULT, char set_character = ' ');
+// -------------------------------------------------------------------------------------------------------------------
 
 };
 
@@ -48,7 +48,7 @@ class Image : protected Size
     
 // ------------------------------------------------------------
         Image(AKML image_file);
-        Image(Size set_size);
+        Image(Size set_size = Size());
         ~Image() { delete g_image; }
 // ------------------------------------------------------------
         void initImage(Size set_size);

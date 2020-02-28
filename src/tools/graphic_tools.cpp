@@ -18,6 +18,9 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "tools/graphic_tools.hpp"
 
+#include <cstdlib>
+#include <sstream>
+
 namespace AK
 {
 
@@ -30,10 +33,45 @@ Pixel::Pixel(Color set_foreground = Color::DEFAULT, Color set_background = Color
 
 Image::Image(AKML image_file)
 {
+    Size size(std::atoi(image_file.get("width").c_str()), std::atoi(image_file.get("height").c_str()));
+    initImage(size);
 
+    std::stringstream char_str;
+    char_str << image_file.get("image");
+    std::stringstream foreground_str;
+    foreground_str << image_file.get("foreground");
+    std::stringstream background_str;
+    background_str << image_file.get("background");
+
+    char c, f, b;
+
+    for(int row = 0; ; row ++)
+    {
+        for(int column = 0; ; column ++)
+        {
+            char_str >> c;
+            if(c == '\n' || c == EOF)
+            {
+                break;
+            }
+            if(f != '\n' || f != EOF)
+            {
+                foreground_str >> f;
+            }
+            if(b != '\n' || b != EOF)
+            {
+                background_str >> b;
+            }
+            g_image[row][column] = Pixel(charToColor(b), charToColor(f), c);
+        }
+        if(c == EOF)
+        {
+            return;
+        }
+    }
 }
 
-Image::Image(Size set_size)
+Image::Image(Size set_size = Size())
 {
     initImage(set_size);
 }

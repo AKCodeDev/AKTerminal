@@ -18,6 +18,8 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "tools/color_tools.hpp"
 
+#include "tools/warn_tools.hpp"
+
 #include <iostream>
 #ifdef _WIN32
     #include <windows.h>
@@ -119,7 +121,7 @@ void printColor(bool is_background, Color print_color)
 
         case Color::DEFAULT:
             // Print default
-            resetColor();
+            std::cout << (is_background ? "\033[40m" : "\033[37m");
             return;
     }
 #ifdef _WIN32
@@ -147,6 +149,42 @@ void resetColor()
     std::cout << "\033[0m";
 #endif
 } // resetColor
+
+Color charToColor(char character)
+{
+    switch(character)
+    {
+        case 'r':
+        case 'R':
+            return Color::RED;
+        case 'g':
+        case 'G':
+            return Color::GREEN;
+        case 'b':
+        case 'B':
+            return Color::BLUE;
+        case 'k':
+        case 'K':
+            return Color::BLACK;
+        case 'y':
+        case 'Y':
+            return Color::YELLOW;
+        case 'c':
+        case 'C':
+            return Color::CYAN;
+        case 'm':
+        case 'M':
+            return Color::MAGENTA;
+        case 'w':
+        case 'W':
+            return Color::WHITE;
+        case 'd':
+        case 'D':
+            return Color::DEFAULT;
+        default:
+            throwError(("Invalid color char \"%c\"", character));
+    }
+}
 
 Color reverseColor(Color color)
 {

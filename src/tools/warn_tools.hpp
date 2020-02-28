@@ -24,15 +24,15 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 namespace AK
 {
 
-// ----------------------------------------------------------------
-void tryError(bool condition, std::string message, int return_val);
-// ----------------------------------------------------------------
-void throwError [[noreturn]] (std::string message, int return_val);
-// ----------------------------------------------------------------
+// --------------------------------------------------------------------
+void tryError(bool condition, std::string message, int return_val = 1);
+// --------------------------------------------------------------------
+void throwError [[noreturn]] (std::string message, int return_val = 1);
+// --------------------------------------------------------------------
 void tryWarn(bool condition, std::string message);
-// ----------------------------------------------------------------
+// --------------------------------------------------------------------
 void throwWarn(std::string message);
-// ----------------------------------------------------------------
+// --------------------------------------------------------------------
 
 }
 

@@ -45,6 +45,8 @@ void printBackgroundColor(Color print_color);
 // ----------------------------------------------------
 void resetColor();
 // ----------------------------------------------------
+Color charToColor(char character);
+// ----------------------------------------------------
 Color reverseColor(Color color);
 // ----------------------------------------------------
 
