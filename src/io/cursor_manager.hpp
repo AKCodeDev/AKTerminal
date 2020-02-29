@@ -20,8 +20,8 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #define CURSOR_MANAGER
 
 #include "io/input_manager.hpp"
-#include "tools/graphic_tools.hpp"
-#include "tools/geometry_tools.hpp"
+#include "base/geometry.hpp"
+#include "base/graphic.hpp"
 #include "manager_template.hpp"
 
 namespace AK

@@ -19,8 +19,8 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #ifndef WIDGET
 #define WIDGET
 
-#include "tools/geometry_tools.hpp"
-#include "tools/graphic_tools.hpp"
+#include "base/geometry.hpp"
+#include "base/graphic.hpp"
 
 #include <string>
 

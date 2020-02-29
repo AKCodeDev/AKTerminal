@@ -44,7 +44,6 @@ a   [label name]
     [yet another part of its content]
 a   [another label name]
 ...
-
 ```
 
 Between each content line there is a line break added.

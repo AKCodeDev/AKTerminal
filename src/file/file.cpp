@@ -16,7 +16,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-#include "tools/file_tools.hpp"
+#include "file/file.hpp"
 
 #include "tools/warn_tools.hpp"
 
@@ -74,8 +74,8 @@ std::string File::getLineFromChar(char from_char)
 std::string File::getLineBetweenChar(char from_char, char to_char)
 {
     std::string str = getLine();
-    std::string::size_type from_position = str.find(from_char);
-    std::string::size_type to_position = str.find(to_char);
+    std::string::size_type from_position = str.find_first_of(from_char);
+    std::string::size_type to_position = str.find_last_of(to_char);
 
     tryError(from_position == std::string::npos, ("Didn't find char %c in class \"File\"", from_char));
     tryError(to_position == std::string::npos, ("Didn't find char %c in class \"File\"", to_char));

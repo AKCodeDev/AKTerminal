@@ -20,7 +20,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #define WIDGET_MANAGER
 
 #include "widget/widget.hpp"
-#include "manager_template.hpp"
+#include "base/manager.hpp"
 
 #include <vector>
 
@@ -34,6 +34,8 @@ class WidgetManager : public Manager<WidgetManager>
         std::vector<Widget *> g_all_widgets;
 
     public:
+
+        std::vector<Widget *> layAllWidgets();
 
         void onUpdate();
 

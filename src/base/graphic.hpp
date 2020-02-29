@@ -19,9 +19,9 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #ifndef GRAPHIC_TOOLS
 #define GRAPHIC_TOOLS
 
-#include "tools/akml_tools.hpp"
+#include "base/geometry.hpp"
+#include "file/akml.hpp"
 #include "tools/color_tools.hpp"
-#include "tools/geometry_tools.hpp"
 
 namespace AK
 {

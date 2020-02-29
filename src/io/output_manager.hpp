@@ -20,9 +20,9 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #define OUTPUT_MANAGER
 
 #include "tools/color_tools.hpp"
-#include "tools/geometry_tools.hpp"
-#include "tools/graphic_tools.hpp"
-#include "manager_template.hpp"
+#include "base/geometry.hpp"
+#include "base/graphic.hpp"
+#include "base/manager.hpp"
 
 namespace AK
 {
