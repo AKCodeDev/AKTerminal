@@ -31,6 +31,36 @@ Pixel::Pixel(Color set_foreground = Color::DEFAULT, Color set_background = Color
     character = set_character;
 }
 
+void Pixel::operator= (const Pixel & set_pixel)
+{
+    switch(set_pixel.background)
+    {
+        case Color::REVERSE:
+            background = reverseColor(background);
+            break;
+        case Color::ALPHA:
+            break;
+        default:
+            background = set_pixel.background;
+    }
+
+    switch(set_pixel.foreground)
+    {
+        case Color::REVERSE:
+            foreground = reverseColor(foreground);
+            break;
+        case Color::ALPHA:
+            break;
+        default:
+            foreground = set_pixel.foreground;
+    }
+
+    if(set_pixel.foreground != Color::ALPHA)
+    {
+        character = set_pixel.character;
+    }
+}
+
 Image::Image(AKML image_file)
 {
     Size size(std::atoi(image_file.get("width").c_str()), std::atoi(image_file.get("height").c_str()));

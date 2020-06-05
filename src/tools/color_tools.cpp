@@ -121,9 +121,22 @@ void printColor(bool is_background, Color print_color)
 
         case Color::DEFAULT:
             // Print default
+#ifdef _WIN32
+            setSaved(is_background, is_background ? 0 : 0xf);
+#elif __unix__
             std::cout << (is_background ? "\033[40m" : "\033[37m");
-            return;
+#endif
+            break;
+
+        case Color::REVERSE:
+            // Print reverse color of current color
+            throwError("Invalid color output \"reverse\"");
+        
+        case Color::ALPHA:
+            // Print reverse color of current color
+            throwError("Invalid color output \"alpha\"");
     }
+
 #ifdef _WIN32
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), g_saved_background * 0x10 + g_saved_foreground);
 #endif
@@ -181,6 +194,9 @@ Color charToColor(char character)
         case 'd':
         case 'D':
             return Color::DEFAULT;
+        case 'v':
+        case 'V':
+            return Color::REVERSE;
         default:
             throwError("Invalid color char");
     }
@@ -188,9 +204,9 @@ Color charToColor(char character)
 
 Color reverseColor(Color color)
 {
-	if(color == Color::DEFAULT)
+	if(color >= Color::DEFAULT)
 	{
-		return Color::DEFAULT;
+		return color;
 	}
     return (Color)(((int)color + (int)Color::DEFAULT / 2) % (int)Color::DEFAULT);
 } // reverseColor

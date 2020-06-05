@@ -22,27 +22,33 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #include "base/geometry.hpp"
 #include "base/graphic.hpp"
 
+#include <map>
 #include <string>
+#include <vector>
 
 namespace AK
 {
 
-class Widget : public BorderedImage
+typedef std::vector<Widget *> WidgetChild;
+
+class Widget : public BorderedImage, protected Location
 {
+    friend class WidgetManager;
+
     public:
 
         enum class WidgetAttribute
         {
-            PROPORTION,
             WIDTH,
             HEIGHT,
-            PADDING,
+            PROPORTION,
             X,
             Y,
+            PADDING,
             LAYOUT,
             ALIGN,
             TEXT,
-            IMAGE,
+            PATH,
             VISIBLE,
             FOCUSABLE,
             COUNT
@@ -54,31 +60,22 @@ class Widget : public BorderedImage
         bool g_focusable;
         bool g_focused;
 
-        Location g_location;
-
         std::string g_id;
+
+        WidgetChild g_children;
+
+        std::map<WidgetAttribute, std::string> g_attribute;
 
     public:
 
 // -----------------------------------------------------------
-        virtual void add(Location place, Size size);
+        virtual void beforeAdd();
+        virtual void beforeRender();
         virtual std::string getTypeName() = 0;
 // -----------------------------------------------------------
         void setVisible(bool vis) { g_visible = vis; }
         void setFocusable(bool focus) { g_focusable = focus; }
         void setFocused(bool focus) { g_focused = focus; }   
-// -----------------------------------------------------------
-        void move(Location point) { g_location = point; }
-// -----------------------------------------------------------
-        void setID(std::string str) { g_id = str; }
-// -----------------------------------------------------------
-        bool ifVisible() const { return g_visible; }
-        bool ifFocusable() const { return g_focusable; }
-        bool ifFocused() const { return g_focused; }
-// -----------------------------------------------------------
-        Location getLocation() const { return g_location; }
-// -----------------------------------------------------------
-        std::string getID() const { return g_id; } 
 // -----------------------------------------------------------
 
 };

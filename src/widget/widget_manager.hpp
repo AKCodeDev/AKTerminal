@@ -19,10 +19,8 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #ifndef WIDGET_MANAGER
 #define WIDGET_MANAGER
 
-#include "widget/widget.hpp"
 #include "base/manager.hpp"
-
-#include <vector>
+#include "widget/widget.hpp"
 
 namespace AK
 {
@@ -31,11 +29,15 @@ class WidgetManager : public Manager<WidgetManager>
 {
     private:
 
-        std::vector<Widget *> g_all_widgets;
+        WidgetChild g_all_widgets;
+
+        void addWidget(Widget add_widget);
+
+        void renderWidget(Widget render_widget);
 
     public:
 
-        std::vector<Widget *> layAllWidgets();
+        WidgetChild layAllWidgets();
 
         void onUpdate();
 

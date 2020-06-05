@@ -19,7 +19,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #ifndef INPUT_MANAGER
 #define INPUT_MANAGER
 
-#include "manager_template.hpp"
+#include "base/manager.hpp"
 
 namespace AK
 {

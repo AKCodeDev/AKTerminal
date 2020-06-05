@@ -32,7 +32,9 @@ enum class Color
     BLUE,
     MAGENTA,
     WHITE,
-    DEFAULT
+    DEFAULT,
+    REVERSE,
+    ALPHA
 }; // color
 
 // ----------------------------------------------------

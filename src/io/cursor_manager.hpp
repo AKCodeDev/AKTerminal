@@ -22,30 +22,30 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #include "io/input_manager.hpp"
 #include "base/geometry.hpp"
 #include "base/graphic.hpp"
-#include "manager_template.hpp"
+#include "base/manager.hpp"
 
 namespace AK
 {
 
-class CursorManager : public Manager<OutputManager>, public Image
+class CursorManager : public Manager<CursorManager>
 {
     private:
         
         Location g_location;
+        Pixel g_pixel = (Color::ALPHA, Color::REVERSE);
         
     public:
     
-// --------------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------------
         CursorManager();
-// --------------------------------------------------------------------------------------
-        #define DEFAULT_CURSOR ' '
-        void setCharacter(char set_character) { * g_image->character = set_character; }
-// --------------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------------
+        void setCharacter(char set_character) { g_pixel.character = set_character; }
+// ------------------------------------------------------------------------------------
         Location getClickedLocation() const { return g_location; };
-        bool getIfClicked() const { return InputManager::get()->getHitChar == '\n'; }
-// --------------------------------------------------------------------------------------
+        bool getIfClicked() const { return InputManager::get() -> getHitChar == '\n'; }
+// ------------------------------------------------------------------------------------
         void onUpdate();
-// --------------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------------
         
 };
 

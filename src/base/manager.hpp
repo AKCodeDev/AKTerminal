@@ -35,7 +35,7 @@ class BasicManager
 template<class ChildManager>
 class Manager : public BasicManager
 {
-	protected:
+	private:
 		
 		static ChildManager * g_manager = nullptr;
 		

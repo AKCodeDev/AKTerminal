@@ -26,19 +26,9 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 namespace AK
 {
 
-CursorManager::CursorManager()
-{
-    * g_image -> character = DEFAULT_CURSOR;
-    
-    g_image = new Pixel *;
-    * g_image = new Pixel();
-}
 
 void CursorManager::onUpdate()
 {
-    * g_image -> foreground = reverseColor(foreground);
-    * g_image -> background = reverseColor(background);
-    
     if(InputManager::get()->getHitChar() == LEFT_ARROW)
     {
         g_location.x = std::max(g_location.x - 1, 0);
@@ -56,7 +46,7 @@ void CursorManager::onUpdate()
         g_location.y = std::max(g_location.y + 1, 0);
     }
     
-    OutputManager::g_manager->setPixel(** g_image, g_location);
+    OutputManager::get()->setPixel(g_pixel, g_location);
 }
 
 }
