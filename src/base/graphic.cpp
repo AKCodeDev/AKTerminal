@@ -24,7 +24,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 namespace AK
 {
 
-Pixel::Pixel(Color set_foreground = Color::DEFAULT, Color set_background = Color::DEFAULT, char set_character = ' ')
+Pixel::Pixel(Color set_foreground = Color::WHITE, Color set_background = Color::BLACK, char set_character = ' ')
 {
     foreground = set_foreground;
     background = set_background;
@@ -55,7 +55,7 @@ void Pixel::operator= (const Pixel & set_pixel)
             foreground = set_pixel.foreground;
     }
 
-    if(set_pixel.foreground != Color::ALPHA)
+    if(set_pixel.foreground != Color::ALPHA && set_pixel.foreground != Color::REVERSE)
     {
         character = set_pixel.character;
     }

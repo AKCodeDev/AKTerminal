@@ -15,3 +15,30 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
+
+#include "base/graphic.hpp"
+#include "base/manager.hpp"
+#include "object/object.hpp"
+
+#include <string>
+#include <map>
+
+namespace AK
+{
+
+class ObjectManager : public Manager<ObjectManager>
+{
+    private:
+
+        std::map<std::string, ObjectChild> g_all_objects;
+
+    public:
+
+        void onUpdate();
+
+        void createObject(Object * object);
+        void deleteObject(Object * object);
+
+};
+
+}

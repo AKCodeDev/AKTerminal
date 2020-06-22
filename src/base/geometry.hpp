@@ -33,6 +33,14 @@ struct Location
 
 };
 
+struct Speed
+{
+        int velocity;
+        int direction;
+
+        Speed(int set_velocity = 0, int set_direction = -1);
+};
+
 struct Size
 {
         int width;
@@ -51,6 +59,7 @@ struct Area : Location, Size
         Area(Location set_location, Size set_size);
 // ------------------------------------------------
         bool insideArea(Location point);
+        bool overlayArea(Area area);
 // ------------------------------------------------
         int getWidth() const { return width; }
         int getHeight() const { return height; }

@@ -29,6 +29,11 @@ namespace AK
 
 void CursorManager::onUpdate()
 {
+    if(!g_enable)
+    {
+        return;
+    }
+
     if(InputManager::get()->getHitChar() == LEFT_ARROW)
     {
         g_location.x = std::max(g_location.x - 1, 0);

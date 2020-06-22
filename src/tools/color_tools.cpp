@@ -119,22 +119,15 @@ void printColor(bool is_background, Color print_color)
 #endif
             break;
 
-        case Color::DEFAULT:
-            // Print default
-#ifdef _WIN32
-            setSaved(is_background, is_background ? 0 : 0xf);
-#elif __unix__
-            std::cout << (is_background ? "\033[40m" : "\033[37m");
-#endif
-            break;
-
+        // Inavaliable colors
         case Color::REVERSE:
-            // Print reverse color of current color
             throwError("Invalid color output \"reverse\"");
         
         case Color::ALPHA:
-            // Print reverse color of current color
             throwError("Invalid color output \"alpha\"");
+
+        case Color::COUNT:
+            throwError("Invalid color output \"count\"");
     }
 
 #ifdef _WIN32
@@ -168,35 +161,25 @@ Color charToColor(char character)
     switch(character)
     {
         case 'r':
-        case 'R':
             return Color::RED;
         case 'g':
-        case 'G':
             return Color::GREEN;
         case 'b':
-        case 'B':
             return Color::BLUE;
         case 'k':
-        case 'K':
             return Color::BLACK;
         case 'y':
-        case 'Y':
             return Color::YELLOW;
         case 'c':
-        case 'C':
             return Color::CYAN;
         case 'm':
-        case 'M':
             return Color::MAGENTA;
         case 'w':
-        case 'W':
             return Color::WHITE;
-        case 'd':
-        case 'D':
-            return Color::DEFAULT;
-        case 'v':
-        case 'V':
+        case '!':
             return Color::REVERSE;
+        case '~':
+            return Color::ALPHA;
         default:
             throwError("Invalid color char");
     }
@@ -204,11 +187,11 @@ Color charToColor(char character)
 
 Color reverseColor(Color color)
 {
-	if(color >= Color::DEFAULT)
+	if(color >= Color::COUNT)
 	{
 		return color;
 	}
-    return (Color)(((int)color + (int)Color::DEFAULT / 2) % (int)Color::DEFAULT);
+    return (Color)(((int)color + (int)Color::COUNT / 2) % (int)Color::COUNT);
 } // reverseColor
 
 }

@@ -32,20 +32,23 @@ class CursorManager : public Manager<CursorManager>
     private:
         
         Location g_location;
-        Pixel g_pixel = (Color::ALPHA, Color::REVERSE);
+        Pixel g_pixel = (Color::REVERSE, Color::REVERSE);
+
+        bool g_enable = true;
         
     public:
     
-// ------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------
         CursorManager();
-// ------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------
         void setCharacter(char set_character) { g_pixel.character = set_character; }
-// ------------------------------------------------------------------------------------
+        void setEnable(bool set_enable) { g_enable = set_enable; }
+// --------------------------------------------------------------------------------------
         Location getClickedLocation() const { return g_location; };
-        bool getIfClicked() const { return InputManager::get() -> getHitChar == '\n'; }
-// ------------------------------------------------------------------------------------
+        bool getIfClicked() const { return InputManager::get() -> getHitChar() == '\n'; }
+// --------------------------------------------------------------------------------------
         void onUpdate();
-// ------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------
         
 };
 

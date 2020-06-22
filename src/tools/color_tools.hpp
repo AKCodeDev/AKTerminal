@@ -29,12 +29,12 @@ enum class Color
     GREEN,
     BLACK,
     CYAN,
+    ALPHA,
     BLUE,
     MAGENTA,
     WHITE,
-    DEFAULT,
     REVERSE,
-    ALPHA
+    COUNT
 }; // color
 
 // ----------------------------------------------------

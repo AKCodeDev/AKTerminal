@@ -21,13 +21,57 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "base/graphic.hpp"
 
+#include <string>
+#include <vector>
+
 namespace AK
 {
 
-class Object
+typedef std::vector<Object *> ObjectChild;
+
+class Object : public Image
 {
+    friend class ObjectManager;
+
+    public:
+
+        enum class Events
+        {
+            CREATE,
+            DESTROY,
+            COLLIDE,
+            KEY,
+            KEYPRESSED,
+            KEYRELEASED,
+            MOUSE,
+            MOUSEENTERED,
+            MOUSEOUT,
+            GLOBALMOUSE,
+            OUTOFBORDER,
+            COUNT
+        };
+
     private:
 
+        Area g_collide_mask;
+
+        Location g_location;
+
+        Location g_center;
+
+        Speed g_speed;
+
+    public:
+
+        virtual void ifGlobalEvent(Events event);
+
+        virtual std::string getTypeName() = 0;
+
+        void setImage(Image set_image);
+        void setLocation(Location set_location);
+        void setCollisionMask(Area set_mask);
+        void setSpeed(Speed set_speed);
+        void moveToLocation(Location location);
 
 };
 
