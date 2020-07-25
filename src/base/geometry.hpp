@@ -33,14 +33,6 @@ struct Location
 
 };
 
-struct Speed
-{
-        int velocity;
-        int direction;
-
-        Speed(int set_velocity = 0, int set_direction = -1);
-};
-
 struct Size
 {
         int width;
@@ -58,13 +50,36 @@ struct Area : Location, Size
 // ------------------------------------------------
         Area(Location set_location, Size set_size);
 // ------------------------------------------------
-        bool insideArea(Location point);
-        bool overlayArea(Area area);
+        bool ifInside(Location point);
+        bool ifOverlay(Area area);
 // ------------------------------------------------
         int getWidth() const { return width; }
         int getHeight() const { return height; }
 // ------------------------------------------------
 
+};
+
+template<class Child>
+class Matrix : protected Size
+{
+        protected:
+
+                Child ** matrix;
+
+        public:
+// -------------------------------------------------------------------------------
+                Matrix(int set_width = 1, int set_height = 1);
+                ~Matrix() { delete[] matrix };
+// -------------------------------------------------------------------------------
+                initMatrix();
+// -------------------------------------------------------------------------------
+                virtual void setElement(Child set_element, Location set_location);
+                virtual void set(Matrix<Child> set_matrix, Location set_location);
+// -------------------------------------------------------------------------------
+                Child getElement(Location from_location);
+                Matrix<Child> get(Area from_area);
+// -------------------------------------------------------------------------------
+        
 };
 
 }

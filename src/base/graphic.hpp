@@ -40,26 +40,16 @@ struct Pixel
 
 };
 
-class Image : protected Size
-{
-    protected:
-        
-        Pixel ** g_image;
-        
+class Image : protected Matrix<Pixel>
+{    
     public:
     
 // ------------------------------------------------------------
         Image(AKML image_file);
-        Image(Size set_size = Size());
+        using Matrix::Matrix();
         ~Image() { delete g_image; }
 // ------------------------------------------------------------
-        void initImage(Size set_size);
-// ------------------------------------------------------------
-        void setImage(Image set_image, Location set_location);
-        void setStretchedImage(Image set_image, Area set_area);
-        Image getImageFromArea(Area get_area);
-// ------------------------------------------------------------
-        void setPixel(Pixel set_pixel, Location set_location);
+        void setStretched(Image set_image, Area set_area);
 // ------------------------------------------------------------
         
 };
@@ -76,7 +66,7 @@ class BorderedImage : public Image
             int bottom;
         };
 
-    private:
+    protected:
 
         BorderSize g_border;
 
@@ -88,7 +78,7 @@ class BorderedImage : public Image
 // ----------------------------------------------------------------------------
         void setBorderSize(BorderSize size) { g_border = size; }
 // ----------------------------------------------------------------------------
-        void setBorderedImage(Image img);
+        void set(Image img);
 // ----------------------------------------------------------------------------
 
 };

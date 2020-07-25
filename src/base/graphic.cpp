@@ -63,8 +63,9 @@ void Pixel::operator= (const Pixel & set_pixel)
 
 Image::Image(AKML image_file)
 {
-    Size size(std::atoi(image_file.get("width").c_str()), std::atoi(image_file.get("height").c_str()));
-    initImage(size);
+    width = std::atoi(image_file.get("width").c_str());
+    height = std::atoi(image_file.get("height").c_str());
+    initMatrix();
 
     std::stringstream char_str;
     char_str << image_file.get("image");
@@ -80,28 +81,21 @@ Image::Image(AKML image_file)
         for(int column = 0; ; column ++)
         {
             char_str >> c;
+
             if(c == '\n' || c == EOF)
-            {
                 break;
-            }
+
             if(f != '\n' || f != EOF)
-            {
                 foreground_str >> f;
-            }
             else
-            {
-                f = 'd';
-            }
+                f = 'w';
+
             if(b != '\n' || b != EOF)
-            {
                 background_str >> b;
-            }
             else
-            {
-                b = 'd';
-            }
+                b = 'b';
             
-            g_image[row][column] = Pixel(charToColor(b), charToColor(f), c);
+            matrix[row][column] = Pixel(charToColor(b), charToColor(f), c);
         }
         if(c == EOF)
         {
@@ -110,98 +104,15 @@ Image::Image(AKML image_file)
     }
 }
 
-Image::Image(Size set_size = Size())
-{
-    initImage(set_size);
-}
-
-void Image::initImage(Size set_size)
-{
-    g_image = new Pixel * [set_size.width];
-    for(int i = 0; i < set_size.width; i ++)
-    {
-        g_image[i] = new Pixel[set_size.height];
-    }
-}
-
-void Image::setImage(Image set_image, Location set_location)
-{
-    for(int i = 0; i < set_image.width; i ++)
-    {
-        if(i + set_location.x < 0 || i + set_location.x >= width)
-        {
-            continue;
-        }
-        
-        for(int j = 0; j < set_image.height; j ++)
-        {
-            if(j + set_location.y < 0 || i + set_location.y >= height)
-            {
-                continue;
-            }
-            
-            g_image[i + set_location.x][j + set_location.y] = set_image.g_image[i][j];
-        }
-    }
-}
-
-void Image::setStretchedImage(Image set_image, Area set_area)
+void Image::setStretched(Image set_image, Area set_area)
 {
     for(int i = 0; i < set_area.width; i ++)
-    {
-        if(i + set_area.x < 0 || i + set_area.x >= width)
-        {
-            continue;
-        }
-        
         for(int j = 0; j < set_area.height; j ++)
-        {
-            if(j + set_area.y < 0 || i + set_area.y >= height)
-            {
-                continue;
-            }
-            
-            g_image[i + set_area.x][j + set_area.y] = 
-                set_image.g_image[i % set_area.width][j % set_area.height];
-        }
-    }
+            matrix[i + set_area.x][j + set_area.y] = 
+                set_image.matrix[i % set_area.width][j % set_area.height];
 }
 
-Image Image::getImageFromArea(Area get_area)
-{
-    Image ret(get_area);
-
-    for(int i = 0; i < get_area.width; i ++)
-    {
-        if(i + get_area.x < 0 || i + get_area.x >= width)
-        {
-            continue;
-        }
-        
-        for(int j = 0; j < get_area.height; j ++)
-        {
-            if(j + get_area.y < 0 || i + get_area.y >= height)
-            {
-                continue;
-            }
-            
-            ret.g_image[i][j] = g_image[i + get_area.x][j + get_area.y];
-        }
-    }
-
-    return ret;
-}
-
-void Image::setPixel(Pixel set_pixel, Location set_location)
-{
-    if(set_location.x < 0 || set_location.y < 0 || set_location.x > width || set_location.y > height)
-    {
-        return;
-    }
-    g_image[set_location.x][set_location.y] = set_pixel;
-}
-
-void BorderedImage::setBorderedImage(Image img)
+void BorderedImage::set(Image img)
 {
     int center_width = width - g_border.left - g_border.right;
     int center_height = height - g_border.top - g_border.bottom;
