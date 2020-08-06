@@ -1,5 +1,5 @@
 /*
-AKTerminal - A convinent game engine for terminal games
+AKTerminal - A convenient game engine for terminal games
 Copyright (C) 2019-2020 AKCodeDev
 
 This program is free software: you can redistribute it and/or modify
@@ -35,7 +35,7 @@ class Object : public Image
 
     public:
 
-        enum class Events
+        enum class Event
         {
             CREATE,
             DESTROY,
@@ -44,7 +44,7 @@ class Object : public Image
             KEYPRESSED,
             KEYRELEASED,
             MOUSE,
-            MOUSEENTERED,
+            MOUSEIN,
             MOUSEOUT,
             GLOBALMOUSE,
             OUTOFBORDER,
@@ -53,25 +53,23 @@ class Object : public Image
 
     private:
 
-        Area g_collide_mask;
-
         Location g_location;
-
-        Location g_center;
-
-        Speed g_speed;
 
     public:
 
-        virtual void ifGlobalEvent(Events event);
+        virtual void ifGlobalEvent(Event event);
 
         virtual std::string getTypeName() = 0;
-
-        void setImage(Image set_image);
-        void setLocation(Location set_location);
-        void setCollisionMask(Area set_mask);
-        void setSpeed(Speed set_speed);
+        
+        void move(Direction direction);
         void moveToLocation(Location location);
+        void jumpToLocation(Location location);
+
+        Object * ObjectCollided(std::string typename);
+        Object * ObjectAtPlace(std::string typename, Location location);
+
+        void startFollowPath(Path path);
+        void stopFollowPath();
 
 };
 
